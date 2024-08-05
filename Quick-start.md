@@ -13,7 +13,7 @@ function MyButton() {
   );
 }
 ```
-### Now that you’ve declared MyButton, you can nest it into another component:
+Now that you’ve declared MyButton, you can nest it into another component:
 ```javascript
 export default function MyApp() {
   return (
@@ -26,7 +26,7 @@ export default function MyApp() {
 
 ```
 
-#### Notice that <MyButton /> starts with a capital letter. That’s how you know it’s a React component. React component names must always start with a capital letter, while HTML tags must be lowercase.
+Notice that <MyButton /> starts with a capital letter. That’s how you know it’s a React component. React component names must always start with a capital letter, while HTML tags must be lowercase.
 
 Have a look at the result:
 ```javascript
@@ -65,7 +65,7 @@ function AboutPage() {
 }
 ```
 
-#### If you have a lot of HTML to port to JSX, you can use an online converter.
+If you have a lot of HTML to port to JSX, you can use an online converter.
 ## Adding styles 
 In React, you specify a CSS class with className. It works the same way as the HTML `class` attribute:
 ```html
@@ -297,7 +297,4 @@ function MyButton() {
 ```
 Notice how each button “remembers” its own count state and doesn’t affect other buttons.
 
-# Using Hooks
-Functions starting with use are called Hooks. useState is a built-in Hook provided by React. You can find other built-in Hooks in the API reference. You can also write your own Hooks by combining the existing ones.
 
-Hooks are more restrictive than other functions. You can only call Hooks at the top of your components (or other Hooks). If you want to use useState in a condition or a loop, extract a new component and put it there.
