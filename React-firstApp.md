@@ -138,7 +138,7 @@ return (
 ```
 If you prefer more compact code, you can use the conditional ? operator. Unlike if, it works inside JSX:
 
-```javascript
+```html
 <div>
   {isLoggedIn ? (
     <AdminPanel />
