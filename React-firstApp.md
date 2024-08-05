@@ -6,7 +6,7 @@ React apps are made out of components. A component is a piece of the UI (user in
 
 React components are JavaScript functions that return markup:
 
-```reactjs
+```javascript
 function MyButton() {
   return (
     <button>I'm a button</button>
