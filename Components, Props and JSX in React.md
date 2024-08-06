@@ -145,7 +145,7 @@ export default Navbar;
   ```
 
 - **Footer**:
-```css
+  ```css
   .footer {
     background-color: rgb(56, 56, 56);
     text-align: center;
@@ -154,7 +154,7 @@ export default Navbar;
     color: rgb(0, 0, 0);
     width: 100vw;
   }
-```
+  ```
 
 - **Navbar**:
   ```css
@@ -167,10 +167,10 @@ export default Navbar;
     margin: 10px;
     padding: 10px;
   }
-```
+  ```
 
 Feel free to ask if you need more details!
-```                                    
+                                    
 
 # Rules to Follow
 - We should use `classname=anything` not `class`
