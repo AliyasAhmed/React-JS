@@ -1,3 +1,4 @@
+```
 The command `code -r filename` is used to open a file in Visual Studio Code and closing the previous files. Here's what each part does:
 
 - `code`: This is the command to open Visual Studio Code from the terminal.
@@ -5,8 +6,10 @@ The command `code -r filename` is used to open a file in Visual Studio Code and 
 - `dirname`: This is the name of the file you want to open.
 
 So, `code -r dirname` will open the specified file in the current Visual Studio Code window. In short we dont have to do `cd` to specific folder again and again all we can do is `code -r dirname`
+```
+# The useEffect Hook in React
 
-### The useEffect Hook allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional.
+The useEffect Hook allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional.
 useEffect`(<function>, <dependency>)`
 
 # Basic Structure of useEffect
