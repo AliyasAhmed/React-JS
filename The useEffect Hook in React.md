@@ -61,3 +61,87 @@ We should always include the second parameter which accepts an array. We can opt
     //Runs on every render
   });
   ```
+
+`useEffect` in React is versatile and can be used for various purposes beyond just running code on mount. Here are some common scenarios where `useEffect` is helpful:
+
+### 1. **Fetching Data**
+```javascript
+useEffect(() => {
+  fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => {
+      // Process fetched data
+    });
+}, []);
+```
+# - Uses of `useEffect` 
+
+### 2. **Subscriptions and Event Listeners**
+```javascript
+useEffect(() => {
+  const subscription = someService.subscribe(handleDataChange);
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
+```
+- Use `useEffect` to set up subscriptions or event listeners and clean them up when the component unmounts.
+
+### 3. **Updating the DOM**
+```javascript
+useEffect(() => {
+  document.title = `You clicked ${count} times`;
+}, [count]);
+```
+- Use `useEffect` to update parts of the DOM directly, like setting the document title based on state changes.
+
+### 4. **Integration with Libraries or External APIs**
+```javascript
+useEffect(() => {
+  const script = document.createElement('script');
+  script.src = 'https://example.com/library.js';
+  script.async = true;
+  document.body.appendChild(script);
+  return () => {
+    document.body.removeChild(script);
+  };
+}, []);
+```
+- Use `useEffect` to integrate with third-party libraries or load scripts dynamically.
+
+### 5. **Performing Cleanup**
+```javascript
+useEffect(() => {
+  const timer = setInterval(() => {
+    // Do something periodically
+  }, 1000);
+  return () => {
+    clearInterval(timer);
+  };
+}, []);
+```
+- Use `useEffect` to set up cleanup operations, like clearing intervals or timeouts.
+
+### 6. **Conditional Effects**
+```javascript
+useEffect(() => {
+  if (someCondition) {
+    // Perform effect when condition is true
+  }
+}, [someCondition]);
+```
+- Use `useEffect` with dependencies to conditionally run code based on state or props changes.
+
+### 7. **Optimizing Performance**
+```javascript
+useEffect(() => {
+  // Expensive calculations or operations
+  return () => {
+    // Cleanup or cancel operations
+  };
+}, [dependency]);
+```
+- Use `useEffect` to optimize performance by running effects only when necessary, controlled by the dependency array.
+
+### Summary:
+`useEffect` is a powerful tool in React for managing side effects in function components. It provides a way to perform actions that need to happen in response to component lifecycle events, state changes, or external interactions, ensuring your components are dynamic and responsive to data and user actions.
