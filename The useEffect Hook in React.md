@@ -27,6 +27,26 @@ useEffect`(<function>, <dependency>)`
   }
   ```
 
+### Basic Example of UseEffect
+  ```javascript
+  import React, { useEffect, useState } from 'react'
+  import './App.css';
+  function App() {
+    const [count, setcount] = useState(0)
+    useEffect(() => {
+      alert('this is my first use effect')
+    }, []);
+    return (
+      <div>
+        <h1>{count}</h1>
+        <button onClick={()=>setcount(count+1)}>Click me</button>
+      </div>
+    )
+  }
+  
+  export default App
+  ```
+
 ### Use setTimeout() to count 1 second after initial render:
 
   ```javascript
