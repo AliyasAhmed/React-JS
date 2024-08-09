@@ -132,3 +132,45 @@ But with 'useref', whenever the code re-renders, the value will be increased.
   export default App
   
   ```
+
+### **Explanation of `useRef` in Your New Example**
+
+In this code, `useRef` is used to reference the `<button>` element so you can interact with it directly in JavaScript.
+
+### **What is `useRef` Doing Here?**
+
+- **Initialization**: 
+  ```javascript
+  const btnRef = useRef();
+  ```
+  - `btnRef` is a reference object created using `useRef()`. Initially, `btnRef.current` is `undefined`, but after the first render, it will point to the button element in the DOM.
+
+- **Accessing the Button in `useEffect`**:
+  ```javascript
+  useEffect(() => { 
+    console.log(`First rendering..`); 
+    btnRef.current.style.backgroundColor = "red";
+  }, []);
+  ```
+  - This `useEffect` runs only once after the initial render (because of the empty dependency array `[]`).
+  - Inside `useEffect`, `btnRef.current` is used to change the button's background color to red. This directly modifies the DOM element referenced by `btnRef`.
+
+- **Interacting with the Button on Click**:
+  ```javascript
+  <button onClick={() => { btnRef.current.style.display = "none"; }}>
+    Change me
+  </button>
+  ```
+  - This second button uses `btnRef.current` to hide the first button when clicked. It directly manipulates the `display` style of the referenced button, making it disappear from the screen.
+
+### **Key Points:**
+
+- **`useRef`** allows you to get a direct reference to the DOM element (`<button>`) so you can manipulate it in JavaScript without causing re-renders.
+- In this code:
+  - **`btnRef.current.style.backgroundColor = "red"`** changes the button's background color after the first render.
+  - **`btnRef.current.style.display = "none"`** hides the button when the "Change me" button is clicked.
+
+### **Why Use `useRef` Here?**
+
+- **Direct DOM Manipulation**: `useRef` is perfect for cases where you need to directly interact with a DOM element, such as changing its style or visibility, without triggering a re-render of the component. 
+- **Performance**: Since `useRef` doesn't cause re-renders, it's more efficient for tasks like changing styles or other direct DOM manipulations.
