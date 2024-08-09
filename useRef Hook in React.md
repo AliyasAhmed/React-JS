@@ -94,13 +94,15 @@ But with 'useref', whenever the code re-renders, the value will be increased.
   
   function App() {
     const [count, setCount] = useState(0)
-    const btnRef = useRef()
+    const a = useRef(0)
+    const btnref = useRef()
+    useEffect(()=>{
+      a.current = a.current + 1
+      btnref.current.style.backgroundColor = "aqua"
+      btnref.current.style.color = "black"
+      console.log(`value of a is ${a.current}`)
   
-    useEffect(() => { 
-      console.log(`First rendering..`) 
-      btnRef.current.style.backgroundColor = "red"
-    }, []);
-    
+    })
   
     return (
       <>
@@ -114,7 +116,7 @@ But with 'useref', whenever the code re-renders, the value will be increased.
         </div>
         <h1>Vite + React</h1>
         <div className="card">
-          <button ref={btnRef} onClick={() => setCount((count) => count + 1)}>
+          <button ref={btnref} onClick={() => setCount((count) => count + 1)}>
             count is {count}
           </button>
           <p>
@@ -124,13 +126,12 @@ But with 'useref', whenever the code re-renders, the value will be increased.
         <p className="read-the-docs">
           Click on the Vite and React logos to learn more
         </p>
-        <button onClick={()=>{btnRef.current.style.display = "none"}}>Change me</button>
       </>
     )
   }
   
   export default App
-  
+    
   ```
 
 ### **Explanation of `useRef` in Your New Example**
