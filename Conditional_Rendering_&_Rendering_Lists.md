@@ -177,7 +177,7 @@ In this example:
 
 These basic examples demonstrate how to use conditional rendering and list rendering in React. If you need more details or have any questions, feel free to ask!
 
-I understand that you're trying to create a simple React component that displays a message based on whether a user is active or not. You also want to include a button that toggles the active state when clicked. However, there are a few issues in your code:
+# With Toggle Button
 
 1. The state variables are named incorrectly. It should be `const [isActive, setIsActive]` instead of `const [setactive, isactive]`.
 2. The button's `onClick` handler should toggle the `isActive` state.
