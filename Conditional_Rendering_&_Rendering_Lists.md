@@ -177,6 +177,70 @@ In this example:
 
 These basic examples demonstrate how to use conditional rendering and list rendering in React. If you need more details or have any questions, feel free to ask!
 
+I understand that you're trying to create a simple React component that displays a message based on whether a user is active or not. You also want to include a button that toggles the active state when clicked. However, there are a few issues in your code:
+
+1. The state variables are named incorrectly. It should be `const [isActive, setIsActive]` instead of `const [setactive, isactive]`.
+2. The button's `onClick` handler should toggle the `isActive` state.
+
+Here's the corrected code:
+
+```jsx
+import React, { useState } from "react";
+
+const App = () => {
+  const [isActive, setIsActive] = useState(true);
+
+  const toggleActiveState = () => {
+    setIsActive(prevState => !prevState);
+  };
+
+  return (
+    <div>
+      <h1>Active Users</h1>
+      {isActive ? <p>User is active</p> : <p>User is not active</p>}
+      <button onClick={toggleActiveState}>
+        Toggle Active State
+      </button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Explanation:
+
+1. **State Variables:**
+   ```jsx
+   const [isActive, setIsActive] = useState(true);
+   ```
+   - `isActive` holds the current state (true or false).
+   - `setIsActive` is a function to update the state.
+
+2. **Toggle Function:**
+   ```jsx
+   const toggleActiveState = () => {
+     setIsActive(prevState => !prevState);
+   };
+   ```
+   - This function toggles the `isActive` state between true and false.
+
+3. **Conditional Rendering:**
+   ```jsx
+   {isActive ? <p>User is active</p> : <p>User is not active</p>}
+   ```
+   - This renders different messages based on the value of `isActive`.
+
+4. **Button:**
+   ```jsx
+   <button onClick={toggleActiveState}>
+     Toggle Active State
+   </button>
+   ```
+   - The button calls `toggleActiveState` when clicked, which toggles the `isActive` state.
+
+Now, when you click the button, it will toggle between displaying "User is active" and "User is not active".
+
 ### Summary
 
 - **Conditional Rendering**: Use the logical AND operator (`&&`) for simple conditions without an else case, and the ternary operator (`?:`) for conditions with both true and false cases.
