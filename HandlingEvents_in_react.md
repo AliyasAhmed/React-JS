@@ -67,9 +67,7 @@ In this example, clicking the button will trigger the `handleClick` function wit
 These examples show how to handle events in React functional components in a simple and straightforward way.
 
 
-# Handling Events With Form
-
-## Handling Events and Forms in React
+# Handling Events and Forms in React
 
 ### Code Example
 
