@@ -173,8 +173,6 @@ export default App;
    - Two input fields for "email" and "phone" with `onChange` events.
    - A commented-out div for a `onMouseOver` event.
 
-My apologies for missing that line. Let's explain it now:
-
 ### Explanation of `setForm({ ...form, [e.target.name]: e.target.value });`
 
 This line of code is used inside the `handleChange` function to update the form state dynamically based on the input field changes.
