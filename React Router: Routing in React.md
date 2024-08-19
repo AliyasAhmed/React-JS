@@ -13,10 +13,14 @@ First, let's look at some simple React components:
    const Home = () => {
      return (
        <div>
+           <img src="https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?      
+            auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
          This is Home
        </div>
      )
    }
+   
+
 
    export default Home
    ```
@@ -26,15 +30,17 @@ First, let's look at some simple React components:
 2. **About Component**:
    ```jsx
    import React from 'react'
-
+   
    const About = () => {
      return (
        <div>
+           <img src="https://images.pexels.com/photos/33045/lion-wild-africa-african.jpg? 
+            auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
          This is about
        </div>
      )
    }
-
+   
    export default About
    ```
 
@@ -43,15 +49,17 @@ First, let's look at some simple React components:
 3. **Login Component**:
    ```jsx
    import React from 'react'
-
+   
    const Login = () => {
      return (
        <div>
+           <img src="https://images.pexels.com/photos/1563355/pexels-photo-1563355.jpeg? 
+            auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
          This is login
        </div>
      )
    }
-
+   
    export default Login
    ```
 
