@@ -5,7 +5,10 @@ React Router is a tool that helps you navigate between different pages in a Reac
 ### Components Explained
 
 First, let's look at some simple React components:
-
+First install React Router
+   ```
+   npm i react-router-dom
+   ```
 1. **Home Component**:
    ```jsx
    import React from 'react'
