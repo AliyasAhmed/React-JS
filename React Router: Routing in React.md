@@ -1,0 +1,170 @@
+### What is React Router?
+
+React Router is a tool that helps you navigate between different pages in a React application without refreshing the entire page. Think of it as a way to show different content based on the URL, just like you would on a regular website.
+
+### Components Explained
+
+First, let's look at some simple React components:
+
+1. **Home Component**:
+   ```jsx
+   import React from 'react'
+
+   const Home = () => {
+     return (
+       <div>
+         This is Home
+       </div>
+     )
+   }
+
+   export default Home
+   ```
+
+   - This component just displays "This is Home".
+
+2. **About Component**:
+   ```jsx
+   import React from 'react'
+
+   const About = () => {
+     return (
+       <div>
+         This is about
+       </div>
+     )
+   }
+
+   export default About
+   ```
+
+   - This component just displays "This is about".
+
+3. **Login Component**:
+   ```jsx
+   import React from 'react'
+
+   const Login = () => {
+     return (
+       <div>
+         This is login
+       </div>
+     )
+   }
+
+   export default Login
+   ```
+
+   - This component just displays "This is login".
+
+### Navbar Component
+
+The Navbar helps users navigate between different pages:
+
+```jsx
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+
+const Navbar = () => {
+  return (
+    <div>
+      <nav className='flex justify-start list-none gap-20 bg-slate-800 content-center transition-all'>
+        <NavLink to="/Home"><li>Home</li></NavLink>
+        <NavLink to="/About"><li>About</li></NavLink>
+        <NavLink to="/Login"><li>Login</li></NavLink>
+      </nav>
+    </div>
+  )
+}
+
+export default Navbar
+```
+
+- **NavLink** is a special link that helps change the URL without refreshing the page.
+- The `to` attribute defines the URL path.
+
+### User Component with Dynamic URL
+
+The User component shows different content based on the URL parameter:
+
+```jsx
+import React from 'react'
+import { useParams } from 'react-router-dom'
+
+const User = () => {
+  const params = useParams()
+  return (
+    <div>
+      I am user {params.username}
+    </div>
+  )
+}
+
+export default User
+```
+
+- **useParams**: This hook gets the parameters from the URL. If the URL is `/user/Alice`, `params.username` will be `Alice`.
+
+### App Component - Setting Up Routes
+
+The App component sets up the routes:
+
+```jsx
+import React from 'react'
+import Navbar from './components/Navbar'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Home from './components/Home'
+import Login from './components/Login'
+import About from './components/About'
+import User from './components/User'
+
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: '/Home',
+      element: <> <Navbar /> <Home /></>
+    },
+    {
+      path: '/login',
+      element: <> <Navbar /> <Login /></>
+    },
+    {
+      path: '/about',
+      element: <> <Navbar /> <About /></>
+    },
+    {
+      path: '/user/:username',
+      element: <> <Navbar /> <User /></>
+    }
+  ])
+
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  )
+}
+
+export default App
+```
+
+- **createBrowserRouter**: This function defines different routes for your application.
+  - `path`: The URL path (e.g., `/Home`).
+  - `element`: The component(s) to show when the path matches.
+- **RouterProvider**: This wraps the application and makes the routing work.
+
+### Putting It All Together
+
+1. When you navigate to `/Home`, the Home component will be displayed along with the Navbar.
+2. When you navigate to `/About`, the About component will be displayed along with the Navbar.
+3. When you navigate to `/Login`, the Login component will be displayed along with the Navbar.
+4. When you navigate to `/user/John`, the User component will be displayed with "I am user John" along with the Navbar.
+
+### Summary
+
+- **React Router** helps navigate between different pages in your app without refreshing.
+- **Components** are displayed based on the URL path.
+- **NavLink** helps create navigation links.
+- **useParams** gets URL parameters to display dynamic content.
+
+This setup allows you to create a smooth, single-page application where the content changes without reloading the page, just like on a regular website.
