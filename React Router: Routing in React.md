@@ -111,36 +111,38 @@ The App component sets up the routes:
 
 ```jsx
 import React from 'react'
-import Navbar from './components/Navbar'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './components/Home'
-import Login from './components/Login'
+import Navbar from './components/navbar'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom' // This is used to route between multiple pages withour refreshing
+import Home from './components/home'
+import Login from './components/login'
 import About from './components/About'
 import User from './components/User'
 
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: '/Home',
-      element: <> <Navbar /> <Home /></>
+      path:'/Home', //This is how we make multiple paths
+      element:<> <Navbar/> <Home/></>
     },
     {
-      path: '/login',
-      element: <> <Navbar /> <Login /></>
+      path:'/login',
+      element:<> <Navbar/> <Login/></>
     },
     {
-      path: '/about',
-      element: <> <Navbar /> <About /></>
-    },
-    {
-      path: '/user/:username',
-      element: <> <Navbar /> <User /></>
-    }
-  ])
+      path:'/about',
+      element:<> <Navbar/> <About/></>
 
+    },
+    {
+      path:'/user/:username',
+      element:<> <Navbar/> <User/></>
+
+    }
+])
   return (
     <div>
-      <RouterProvider router={router} />
+      
+      <RouterProvider router={router}/> 
     </div>
   )
 }
