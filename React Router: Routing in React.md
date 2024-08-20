@@ -74,21 +74,20 @@ The Navbar helps users navigate between different pages:
 
 ```jsx
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-
+// import { Link } from 'react-router-dom' //in order to not get a refresh whenever we change the page we use link instead of <a></a> in React 
+import { NavLink } from 'react-router-dom' // with navlink we can write functions in link
 const Navbar = () => {
+
   return (
     <div>
       <nav className='flex justify-start list-none gap-20 bg-slate-800 content-center transition-all'>
-        <NavLink to="/Home"><li>Home</li></NavLink>
-        <NavLink to="/About"><li>About</li></NavLink>
-        <NavLink to="/Login"><li>Login</li></NavLink>
+        <NavLink className={(e) => { return e.isActive ? "bg-slate-900 p-10" : "" }} to="/Home"><li >Home</li></NavLink>
+        <NavLink className={(e) => { return e.isActive ? "bg-slate-900 p-10" : "" }} to="/About"><li >About</li></NavLink>
+        <NavLink className={(e) => { return e.isActive ? "bg-slate-900 p-10" : "" }} to="/Login"><li >Login</li></NavLink>
       </nav>
     </div>
   )
 }
-
-export default Navbar
 ```
 
 - **NavLink** is a special link that helps change the URL without refreshing the page.
