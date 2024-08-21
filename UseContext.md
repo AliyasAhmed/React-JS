@@ -17,26 +17,29 @@ The `useContext` hook in React is used to access the value provided by a context
 
 2. **Providing Context Value:**
    ```javascript
-   import React, { useState } from 'react';
-   import { CounterContent } from './content/content';
-   import Navbar from './components/navbar';
+      import React, { useState } from 'react'
+      import { CounterContent } from './content/content'
+      import Navbar from './components/navbar'
+      
+      const App = () => {
+        const [count, setcount] = useState(0)
+        return (
+          <>
+          {/* if we wrap our context in a <CounterContent.Provider> every context within will have the same context we need */}
+          <CounterContent.Provider value={{count, setcount}}> 
+          <Navbar/>
+          <div>
+            <button onClick={()=>setcount((count)=>count+1)}>
+              count is {count}
+            </button>
+          </div>
+          </CounterContent.Provider>
+          </>
+        )
+      }
+      
+      export default App
 
-   const App = () => {
-     const [count, setcount] = useState(0);
-
-     return (
-       <CounterContent.Provider value={{count, setcount}}>
-         <Navbar />
-         <div>
-           <button onClick={() => setcount((count) => count + 1)}>
-             count is {count}
-           </button>
-         </div>
-       </CounterContent.Provider>
-     );
-   };
-
-   export default App;
    ```
 
    - In the `App` component, the `CounterContent.Provider` wraps around the components (`Navbar` and the button).
