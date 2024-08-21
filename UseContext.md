@@ -1,5 +1,31 @@
 ### `useContext` Hook Explanation Using Your Examples
-
+#### Rules to Follow
+      ```jsx
+      // useContext() = React Hook that allows you to share values
+      //                between multiple levels of components
+      //                without passing props through each level
+      
+      // PROVIDER COMPONENT
+      // 1. import {createContext} from 'react';
+      // 2. export const MyContext = createContext();
+      // 3. <MyContext.Provider value={value}>
+      //      <Child />
+      //    </MyContext.Provider>
+      
+      // CONSUMER COMPONENTS
+      // 1. import React, { useContext } from 'react';
+      // 2. import { MyContext } from './ComponentA';
+      // 3. const value = useContext(MyContext);
+      
+      import ComponentA from './ComponentA.jsx';
+      import React from 'react';
+      
+      function App() {
+        return(<ComponentA />);
+      }
+      
+      export default App;
+      ```
 **What is `useContext`?**
 
 The `useContext` hook in React is used to access the value provided by a context. Context is a way to pass data through the component tree without having to pass props down manually at every level.
