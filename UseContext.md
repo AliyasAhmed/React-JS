@@ -3,6 +3,7 @@
 **What is `useContext`?**
 
 The `useContext` hook in React is used to access the value provided by a context. Context is a way to pass data through the component tree without having to pass props down manually at every level.
+In short we can use it again and again in every jsx file without using props to call it. we just need to make one file with createcontext then export it.
 
 ### Step-by-Step Explanation
 ### First we need to make a folder with anyname and make a `js` file in which we do this =>
