@@ -20,7 +20,26 @@
 
    export default Counter;
    ```
-
+   ```jsx
+         // React useContext() hook introduction 🧑‍💻
+      
+      import React, { useState } from 'react';
+      import ComponentB from './ComponentB.jsx';
+      
+      function ComponentA() {
+        const [user, setUser] = useState("BroCode"); // with the help of `setuser` we can set variables anytime in the code where as with `user` we already defined the variable as `brocode`.
+      
+        return (
+          <div className="box">
+            <h1>ComponentA</h1>
+            <h2> Hello ${user}</h2>
+            <ComponentB />
+          </div>
+        );
+      }
+      
+      export default ComponentA;
+      ```
    - **`useState(0)`** initializes the state with `0`.
    - **`count`** is the current state value.
    - **`setCount`** updates the state when the button is clicked.
