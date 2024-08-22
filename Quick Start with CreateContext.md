@@ -96,5 +96,110 @@ Here's the example you provided with explanations:
 - `createContext` is used to create a context.
 - `useContext` is used to consume the context.
 - The context provider (`<Context.Provider>`) wraps the components that need access to the context.
+  
+### Example With `Usestate`
+`APP CONTENT`
+
+   ```jsx
+  import { createContext,useState } from 'react'
+  import './App.css'
+  import Com from './component/com'
+  export const DAl = createContext(0)
+  function App() {
+    const [count, setcount] = useState(0)
+    return (
+      <>
+      <DAl.Provider value={count}>
+        <div className='flex justify-center'>
+          <button onClick={()=>setcount(count+1)}>{count}</button>
+          <Com/>
+        </div>
+        </DAl.Provider>
+      </>
+    )
+  }
+  export default App
+  ```
+Other content
+  ```jsx
+  import React, { useContext } from 'react'
+  import { DAl } from '../App'
+  const com = () => {
+      const value = useContext(DAl)
+      return (
+          <div>
+              {value}
+          </div>
+    )
+  }
+  
+ export default com
+  ```
+### With all the buttons Working
+App Content
+   ```jsx
+   import { createContext, useState } from 'react';
+   import './App.css';
+   import Com from './component/com';
+   import LEX from './component/LEX';
+   
+   export const DAl = createContext();
+   
+   function App() {
+     const [count, setcount] = useState(0);
+   
+     return (
+       <>
+         <DAl.Provider value={{ count, setcount }}>
+           <div className='border border-black p-10'>
+             <button onClick={() => setcount(count + 1)}>{count}</button>
+             <LEX />
+             <Com />
+           </div>
+         </DAl.Provider>
+       </>
+     );
+   }
+   
+   export default App;
+   ```
+Other Content
+
+   ```jsx
+   import React, { useContext } from 'react';
+   import { DAl } from '../App';
+   
+   const Com = () => {
+     const { count, setcount } = useContext(DAl);
+   
+     return (
+       <div className='border border-black p-10'>
+         <button onClick={() => setcount(count + 1)}>Increment from Com</button>
+         <p>Count: {count}</p>
+       </div>
+     );
+   }
+   
+   export default Com;
+   ```
+Other content
+
+   ```jsx
+   import React, { useContext } from 'react';
+   import { DAl } from '../App';
+   
+   const LEX = () => {
+     const { count, setcount } = useContext(DAl);
+   
+     return (
+       <div className='border border-black p-10'>
+           <button onClick={()=>setcount(count+1)}>increase</button>
+         <p>Count from LEX: {count}</p>
+       </div>
+     );
+   }
+   
+   export default LEX;
+   ```
 
 This guide should help you quickly get started with the `useContext` hook in React.
