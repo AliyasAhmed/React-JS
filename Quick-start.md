@@ -298,3 +298,41 @@ function MyButton() {
 Notice how each button “remembers” its own count state and doesn’t affect other buttons.
 
 
+### Example With `Usestate`
+`APP CONTENT`
+
+     ```jsx
+     import { createContext,useState } from 'react'
+    import './App.css'
+    import Com from './component/com'
+    export const DAl = createContext(0)
+    function App() {
+      const [count, setcount] = useState(0)
+      return (
+        <>
+        <DAl.Provider value={count}>
+          <div className='flex justify-center'>
+            <button onClick={()=>setcount(count+1)}>{count}</button>
+            <Com/>
+          </div>
+          </DAl.Provider>
+        </>
+      )
+    }
+    export default App
+    ```
+Other content
+    ```jsx
+    import React, { useContext } from 'react'
+    import { DAl } from '../App'
+    const com = () => {
+        const value = useContext(DAl)
+        return (
+            <div>
+                {value}
+            </div>
+      )
+    }
+    
+   export default com
+  ```
