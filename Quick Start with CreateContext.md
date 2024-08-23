@@ -202,4 +202,83 @@ Other content
    export default LEX;
    ```
 
+Your current implementation has a few issues that need to be addressed:
+
+1. **Context Initialization**: The `useContext` hook is meant to be used within a component to access a context. To create a context, you should use `React.createContext()`, not `useContext()` directly.
+
+2. **Context Provider Usage**: When using a context provider, you should use `MyContext.Provider` instead of `<mycontext>` directly.
+
+3. **Accessing Context Value**: When accessing the context value inside a component, you should ensure you're accessing the value correctly.
+
+Here's the corrected version of your code:
+
+### `App.js`
+```javascript
+import React from 'react'
+import Navbar from './component/Navbar'
+import Home from './component/Home'
+import Projects from './component/Projects'
+import About from './component/About'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createContext } from 'react'
+
+// Create the context
+export const MyContext = createContext()
+
+const App = () => {
+
+  const router = createBrowserRouter([
+    {
+      path:'/Home',
+      element:<><Navbar/><Home/></>
+    },
+    {
+      path:'/Projects',
+      element:<><Navbar/><Projects/></>
+    },
+    {
+      path:'/About',
+      element:<><Navbar/><About/></>
+    }
+  ])
+
+  return (
+    // Use MyContext.Provider to wrap your components and provide the context value
+    <MyContext.Provider value={{ user: 'aliyas' }}>
+      <div>
+        <RouterProvider router={router}/>
+      </div>
+    </MyContext.Provider>
+  )
+}
+
+export default App
+```
+
+### `Projects.js`
+```javascript
+import React, { useContext } from 'react'
+import { MyContext } from '../App'
+
+const Projects = () => {
+  // Access the context value using useContext hook
+  const { user } = useContext(MyContext)
+
+  return (
+    <div>
+      Projects {user}
+    </div>
+  )
+}
+
+export default Projects
+```
+
+### Key Changes:
+1. **Creating Context**: The context is created using `React.createContext()` and assigned to `MyContext`.
+2. **Using the Provider**: The `MyContext.Provider` component wraps the parts of the app that need access to the context, and the value is provided via the `value` prop.
+3. **Accessing Context Value**: In the `Projects` component, the `user` value is accessed using `useContext(MyContext)` and then used in the return statement.
+
+With these changes, your context will be correctly initialized, provided, and consumed across your components.
+
 This guide should help you quickly get started with the `useContext` hook in React.
