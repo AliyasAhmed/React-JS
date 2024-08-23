@@ -202,7 +202,7 @@ Other content
    export default LEX;
    ```
 
-Your current implementation has a few issues that need to be addressed:
+# Your current implementation has a few issues that need to be addressed:
 
 1. **Context Initialization**: The `useContext` hook is meant to be used within a component to access a context. To create a context, you should use `React.createContext()`, not `useContext()` directly.
 
