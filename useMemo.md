@@ -1,4 +1,4 @@
-# The `useMemo` hook in React is used to optimize your app's performance by memoizing (caching) the result of a calculation so that it doesn't need to be recalculated on every render. It only recalculates when one of its dependencies changes.
+### The `useMemo` hook in React is used to optimize your app's performance by memoizing (caching) the result of a calculation so that it doesn't need to be recalculated on every render. It only recalculates when one of its dependencies changes.
 ### Basic Concept:
 - **Without `useMemo`:** A function inside your component gets recalculated every time the component re-renders, even if the inputs haven't changed.
 - **With `useMemo`:** You tell React to "remember" the result of the function and only recalculate it if certain inputs (dependencies) change.
