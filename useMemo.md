@@ -217,6 +217,37 @@ Here's a breakdown of what happens:
 
 So, while `numbers` does indeed hold a large array, the `useMemo` helps avoid unnecessary re-computations of the `find` operation when `count` changes, as `numbers` remains constant.
 
+Let's simplify the explanation of that line:
+
+```jsx
+const magical = useMemo(() => numbers.find(item => item.isMagical), [numbers]);
+```
+
+### What’s Happening Here?
+
+1. **`useMemo`**:
+   - `useMemo` is a React hook used to remember (or "memoize") the result of a calculation so it doesn’t have to be redone on every render.
+   - Think of it as a way to save a result of a calculation and only redo it when necessary.
+
+2. **`numbers.find(item => item.isMagical)`**:
+   - This part finds an item in the `numbers` array where `item.isMagical` is `true`.
+   - If such an item is found, it returns that item. If not, it returns `undefined`.
+
+3. **Dependencies Array `[numbers]`**:
+   - This tells React to redo the calculation only if `numbers` changes.
+   - If `numbers` stays the same, React will use the previously saved result of the calculation.
+
+### Why Use `useMemo`?
+
+- **Performance**: Searching through a large array like `numbers` can be slow. `useMemo` helps avoid performing this search on every render.
+- **Efficiency**: By using `useMemo`, React remembers the result of the search. If `numbers` hasn’t changed, React uses the remembered result instead of searching the array again.
+
+### Example in Simple Terms
+
+Imagine you have a huge list of names, and you’re looking for a specific name that matches a condition. You only want to search the list when the list of names actually changes. If the list stays the same, you don’t want to search through it again. 
+
+`useMemo` helps you remember the result of that search so you don’t have to do it repeatedly, which can save time and make your app faster.
+
 ### Summary
 
 - **`fill(0)`** is used to ensure the array is fully populated with a value (0), making it easier to transform every element.
