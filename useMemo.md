@@ -12,6 +12,34 @@ const memoizedValue = useMemo(() => {
 
 - **First argument**: A function that performs an expensive calculation.
 - **Second argument**: An array of dependencies. If any of these change, the function will re-run.
+
+### Example Without useMemo
+
+```jsx
+import React, { useState } from 'react'
+const num = new Array(30_000_000).fill(0).map((_, i)=>{
+  return{
+    index:i,
+    isMagical:i===29_000_000
+  }
+})
+const App = () => {
+  const[count, setCount] = useState(0)
+  const [number, setNumber] = useState(num)
+  const magic = number.find((item=>item.isMagical))
+  return (
+    <div>
+      <p>magic {magic?magic.index:'not found'}</p>
+      <p>count{count}</p>
+      <button onClick={()=>setCount(count+1)}>Click</button>
+    </div>
+  )
+}
+
+export default App
+```
+
+### Example With useMemo
 ```jsx
 import React, { useMemo, useState } from 'react';
 
