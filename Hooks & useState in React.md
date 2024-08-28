@@ -20,6 +20,8 @@
 
    export default Counter;
    ```
+`const [count, setcount] = useState(0)`
+it means make a `count` which has initial value `0` and make `setcount` which helps us `update` the initial value
    ```jsx
          // React useContext() hook introduction 🧑‍💻
       
