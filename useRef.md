@@ -14,8 +14,9 @@
     let a = 0
     useEffect(() => { 
       a = a + 1;
-      console.log(`rendering and the value of a is ${a}`) //When state is changed this will re-render but due to re-render the value of a will set back to 0. But If we use useRef out value wont be rendered and will be 
-      updated
+      console.log(`rendering and the value of a is ${a}`) //When state is changed this will re-render
+      //but due to re-render the value of a will set back to 0. But If we use useRef out value wont be rendered and will be 
+      //updated
     });
     return (
       <div>
@@ -41,7 +42,8 @@ const App = () => {
   const a = useRef(0) // this will save the value and everythime the app re-renders it will remain same and let the update do it thing.
   useEffect(() => { 
     a.current = a.current + 1; // but we have to use a.current 
-    console.log(`rendering and the value of a is ${a.current}`) //When state is changed this will re-render but due to re-render the value of a will set back to 0. But If we use useRef out value wont be rendered and will be updated
+    console.log(`rendering and the value of a is ${a.current}`) //When state is changed this will re-render
+  //but due to re-render the value of a will set back to 0. But If we use useRef out value wont be rendered and will be updated
   });
   return (
     <div>
