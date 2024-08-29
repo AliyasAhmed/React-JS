@@ -1,5 +1,66 @@
 # **What is `useRef`?**
 
+### When `state` is changed this will re-render but due to re-render the value of a will set back to `0`. But If we use `useRef` out value wont be rendered and will be updated.
+
+### Example Without UseRef
+  ```jsx
+  // Without UseRef Example
+  
+  import React from "react";
+  import { useState, useRef, useEffect } from "react";
+  const App = () => {
+    const [count, Setcount] = useState(0);
+    // as we already know our app re-renders whenever a state is changed we can see that with the help of useEffect
+    let a = 0
+    useEffect(() => { 
+      a = a + 1;
+      console.log(`rendering and the value of a is ${a}`) //When state is changed this will re-render but due to re-render the value of a will set back to 0. But If we use useRef out value wont be rendered and will be 
+      updated
+    });
+    return (
+      <div>
+        <p>Count {count}</p>
+        <button onClick={() => Setcount(count + 1)}>Click</button>
+      </div>
+    );
+  };
+  
+  export default App;
+  ```
+### Example With UseRef
+  ```jsx
+  // Without UseRef Example
+
+import React from "react";
+import { useState, useRef, useEffect } from "react";
+const App = () => {
+  const [count, Setcount] = useState(0);
+  // as we already know our app re-renders whenever a state is changed we can see that with the help of useEffect
+
+  // let a = 0 instead of this we use
+  const a = useRef(0) // this will save the value and everythime the app re-renders it will remain same and let the update do it thing.
+  useEffect(() => { 
+    a.current = a.current + 1; // but we have to use a.current 
+    console.log(`rendering and the value of a is ${a.current}`) //When state is changed this will re-render but due to re-render the value of a will set back to 0. But If we use useRef out value wont be rendered and will be updated
+  });
+  return (
+    <div>
+      <p>Count {count}</p>
+      <button onClick={() => Setcount(count + 1)}>Click</button>
+    </div>
+  );
+};
+
+export default App;
+```
+### State Changes and Re-renders:
+
+When you change state in a React component (e.g., using `useState`), the component re-renders, and the updated state value is reflected in the rendered output. However, if you have other variables or values in the component that are not part of the state, they will be reset to their initial values on each re-render unless they are managed differently.
+
+### Using `useRef`:
+
+`useRef` is a hook that can be used to keep a value that doesn’t cause a re-render when it changes. It allows you to store a value that persists across renders without triggering a component update. This is useful for keeping track of values like timers or previous state values.
+
 `useRef` is a React hook that lets you create a reference to a DOM element or store a value that you can change without making your component re-render.
 
 ### **Why Do We Use `useRef`?**
