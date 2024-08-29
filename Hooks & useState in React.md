@@ -29,7 +29,17 @@ To add state to a component, use one of these Hooks:
    ```
    `const [count, setcount] = useState(0)`
    
-   it means make a `count` which has initial value `0` and make `setcount` which helps us `update` the initial value
+it means make a `count` which has initial value `0` and make `setcount` which helps us `update` the initial value
+
+
+
+In React, when a state changes, the entire component re-renders to reflect the updated state. For example, if you have a `count` state managed with `useState`, changing the value of `count` will cause the component to re-render, and you’ll see the updated `count + 1`.
+
+If you use `useEffect` inside this component, any side effects (like an `alert` message) will run on every re-render, depending on the dependencies you specify in `useEffect`. If the dependency array is empty (`[]`), the effect runs only once after the initial render. However, if the dependency array includes state variables like `count`, the effect will run after every state change, causing the `alert` to show up repeatedly with each update.
+
+
+
+This clarifies the behavior of `useEffect` and `useState` in the context of component re-renders and side effects.
    ```jsx
          // React useContext() hook introduction 🧑‍💻
       
