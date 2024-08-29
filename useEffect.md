@@ -118,6 +118,44 @@ export default WelcomeComponent;
 
 So, in simple terms, both approaches are doing something when the page or component loads, but React’s `useEffect` offers more control over when and how this happens, making it more suitable for modern web apps.
 
+## `useEffect` with and Without Dependency Array
+
+### `useEffect` with an Empty Dependency Array (`[]`):
+
+```jsx
+useEffect(() => {
+  console.log('Rendering');
+}, []);
+```
+
+- **Behavior:** This `useEffect` runs only once, **after the initial render**. The empty dependency array means there are no dependencies, so the effect doesn't run again on subsequent renders.
+- **Use Case:** Ideal for actions you want to perform only once, like fetching data or setting up subscriptions when the component first mounts.
+
+### `useEffect` without a Dependency Array:
+
+```jsx
+useEffect(() => {
+  console.log('Rendering');
+});
+```
+
+- **Behavior:** This `useEffect` runs after every render, because no dependency array is provided. It will execute the effect code whenever the component renders or re-renders.
+- **Use Case:** Useful for actions that need to run every time the component renders or when you have side effects that are not tied to specific dependencies.
+
+### Example Comparison:
+
+1. **Empty Dependency Array (`[]`):**
+   - The `console.log` will run only once, right after the component mounts.
+
+2. **No Dependency Array:**
+   - The `console.log` will run on every render, so you’ll see the log every time the component updates (including when state changes).
+
+### Summary:
+- **`[]`:** Effect runs once after the initial render.
+- **No array:** Effect runs after every render.
+
+This helps control when your side effects should be executed in your React component.
+
 ### Use setTimeout() to count 1 second after initial render:
 
   ```javascript
