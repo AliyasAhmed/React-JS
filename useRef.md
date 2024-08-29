@@ -147,94 +147,26 @@ This way, `useRef` is a handy tool for directly interacting with elements or sto
 If we don't use `useref` here and initialize the value to '0', every time we click on the button, it will be `1` and then zero again. The value won't be saved in memory.
 But with 'useref', whenever the code re-renders, the value will be increased.
 
-# Use of useRef In manipulating dom
+## Diffrence Between `useRef` and `useState`.
 
-  ```javascript 
-  import { useState, useEffect, useRef } from 'react'
-  import reactLogo from './assets/react.svg'
-  import viteLogo from '/vite.svg'
-  import './App.css'
-  
-  function App() {
-    const [count, setCount] = useState(0)
-    const a = useRef(0)
-    const btnref = useRef()
-    useEffect(()=>{
-      a.current = a.current + 1
-      btnref.current.style.backgroundColor = "aqua"
-      btnref.current.style.color = "black"
-      console.log(`value of a is ${a.current}`)
-  
-    })
-  
-    return (
-      <>
-        <div>
-          <a href="https://vitejs.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button ref={btnref} onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </>
-    )
-  }
-  
-  export default App
-    
-  ```
+Both `useRef` and `useState` are useful for different purposes, and choosing between them depends on what you need to do in your component.
 
-### **Explanation of `useRef` in Your New Example**
+### Differences Between `useState` and `useRef`
 
-In this code, `useRef` is used to reference the `<button>` element so you can interact with it directly in JavaScript.
+1. **Triggering Re-renders:**
+   - **`useState`:** Changing a state value with `useState` triggers a re-render of the component. This is useful when you want the UI to update in response to state changes.
+   - **`useRef`:** Changing the `.current` property of a `useRef` object does not trigger a re-render. This is useful for storing values that you don’t want to directly affect the UI.
 
-### **What is `useRef` Doing Here?**
+2. **When to Use `useState`:**
+   - Use `useState` when you need to update the UI based on changes. For example, if you have a counter that needs to be displayed and updated, you should use `useState` because you want the component to re-render and show the new count.
 
-- **Initialization**: 
-  ```javascript
-  const btnRef = useRef();
-  ```
-  - `btnRef` is a reference object created using `useRef()`. Initially, `btnRef.current` is `undefined`, but after the first render, it will point to the button element in the DOM.
+3. **When to Use `useRef`:**
+   - Use `useRef` when you need to persist values across renders without causing re-renders. This is useful for storing mutable values, like timers, DOM references, or any value that should not directly affect the UI.
 
-- **Accessing the Button in `useEffect`**:
-  ```javascript
-  useEffect(() => { 
-    console.log(`First rendering..`); 
-    btnRef.current.style.backgroundColor = "red";
-  }, []);
-  ```
-  - This `useEffect` runs only once after the initial render (because of the empty dependency array `[]`).
-  - Inside `useEffect`, `btnRef.current` is used to change the button's background color to red. This directly modifies the DOM element referenced by `btnRef`.
 
-- **Interacting with the Button on Click**:
-  ```javascript
-  <button onClick={() => { btnRef.current.style.display = "none"; }}>
-    Change me
-  </button>
-  ```
-  - This second button uses `btnRef.current` to hide the first button when clicked. It directly manipulates the `display` style of the referenced button, making it disappear from the screen.
+### Summary:
 
-### **Key Points:**
+- **Use `useState`** when you need to track and display state changes in the UI.
+- **Use `useRef`** for values that need to persist across renders but shouldn’t cause re-renders when updated.
 
-- **`useRef`** allows you to get a direct reference to the DOM element (`<button>`) so you can manipulate it in JavaScript without causing re-renders.
-- In this code:
-  - **`btnRef.current.style.backgroundColor = "red"`** changes the button's background color after the first render.
-  - **`btnRef.current.style.display = "none"`** hides the button when the "Change me" button is clicked.
-
-### **Why Use `useRef` Here?**
-
-- **Direct DOM Manipulation**: `useRef` is perfect for cases where you need to directly interact with a DOM element, such as changing its style or visibility, without triggering a re-render of the component. 
-- **Performance**: Since `useRef` doesn't cause re-renders, it's more efficient for tasks like changing styles or other direct DOM manipulations.
+Both hooks are powerful, and choosing the right one depends on whether you need to affect the component's render behavior.
