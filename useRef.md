@@ -125,3 +125,30 @@ Both `useRef` and `useState` are useful for different purposes, and choosing bet
 - **Use `useRef`** for values that need to persist across renders but shouldn’t cause re-renders when updated.
 
 Both hooks are powerful, and choosing the right one depends on whether you need to affect the component's render behavior.
+
+
+### manipulating Dom
+
+#### Even we can use useref to manupulate dom Like we used to do in normal Javascript with document.style.backgroundcolor = 'red'.
+  ```jsx
+  import React from "react";
+  import { useState, useRef, useEffect } from "react";
+  const App = () => {
+    const [count, Setcount] = useState(0);
+  
+  
+    const dom = useRef(0) 
+    useEffect(() => { 
+      dom.current.style.backgroundColor = 'red' //Even we can use useref to manupulate dom Like we used to do in normal Javascript with document.style.backgroundcolor = 'red'.
+      console.log(`rendering`)
+    });
+    return (
+      <div>
+        <p>Count {count}</p>
+        <button ref={dom} onClick={() => Setcount(count + 1)}>Click</button>
+      </div>
+    );
+  };
+  
+  export default App;
+  ```
