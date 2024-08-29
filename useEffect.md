@@ -1,21 +1,24 @@
 # The useEffect Hook in React
 
+`useEffect` is a hook in React that lets you run some code whenever your component is added to the page, updated, or removed. Think of it as a way to tell React, "Hey, when this component shows up, do this," or "Before this component goes away, clean up this." For example, you might use it to fetch data when the component loads or to set up a timer that stops when the component is no longer needed. The `useEffect` hook runs the code based on the changes in the data or variables you specify, so you can control exactly when and how often it happens.
+
 The useEffect Hook allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional.
 useEffect`(<function>, <dependency>)`
 
 # Basic Structure of useEffect
   ```javascript
-  import React, { useEffect } from 'react';
-  
-  function MyComponent() {
-    useEffect(() => {
-      // Code to run on component mount/update
-  
-      return () => {
-        // Code to run on component unmount (cleanup)
-      };
-    }, []); // Dependency array
-  }
+    import React, { useEffect } from 'react';
+    
+    function MyComponent() {
+      useEffect(() => {
+        // This runs when the component is first added to the page or when it updates
+    
+        return () => {
+          // This runs when the component is removed from the page (cleanup)
+        };
+      }, []); // Dependency array: an empty array means this only runs once when the component is first added
+    }
+
   ```
 
 ### Basic Example of UseEffect
@@ -25,8 +28,8 @@ useEffect`(<function>, <dependency>)`
   function App() {
     const [count, setcount] = useState(0)
     useEffect(() => {
-      alert('this is my first use effect')
-    }, []);
+      alert('Count was changed')
+    }, [count]);
     return (
       <div>
         <h1>{count}</h1>
@@ -37,6 +40,70 @@ useEffect`(<function>, <dependency>)`
   
   export default App
   ```
+
+This will trigger whenever we click on count and it changes the value. Remember we used the count in the array [] section to tell the useEffect 'hey whenever you see count value is changed show an alert.'
+
+Let's look at a simple example comparing how you would do something in plain JavaScript (JS) versus how you'd achieve the same thing in JSX (React).
+
+### Scenario: Displaying a Message on Page Load
+
+**JavaScript Approach:**
+In plain JavaScript, you might use the `window.onload` event to run some code when the page loads. Here's how you would display a message:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Example</title>
+  <script>
+    // JavaScript function to run when the page loads
+    window.onload = function() {
+      alert('Welcome to the page!');
+    };
+  </script>
+</head>
+<body>
+  <h1>Hello World</h1>
+</body>
+</html>
+```
+
+**JSX (React) Approach:**
+In React, you would use the `useEffect` hook to run code when the component is first added to the page. Here’s how the same example would look in JSX:
+
+```jsx
+import React, { useEffect } from 'react';
+
+function WelcomeComponent() {
+  // Using useEffect to run code when the component is added
+  useEffect(() => {
+    alert('Welcome to the page!');
+  }, []); // Empty dependency array means it runs only once
+
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+
+export default WelcomeComponent;
+```
+
+### Explanation:
+
+- **JavaScript (`window.onload`)**:
+  - Runs the function when the entire page (HTML, CSS, JS) has finished loading.
+  - It’s suitable for simple, static websites or basic scripts.
+
+- **JSX (`useEffect`)**:
+  - `useEffect` is more flexible and designed for React’s component-based structure.
+  - Runs the function when the React component is mounted (first displayed) or when dependencies change.
+  - Works better for dynamic, interactive user interfaces, like those created with React.
+
+So, in simple terms, both approaches are doing something when the page or component loads, but React’s `useEffect` offers more control over when and how this happens, making it more suitable for modern web apps.
 
 ### Use setTimeout() to count 1 second after initial render:
 
