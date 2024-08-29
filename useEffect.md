@@ -5,6 +5,7 @@
 The useEffect Hook allows you to perform side effects in your components. Some examples of side effects are: fetching data, directly updating the DOM, and timers. useEffect accepts two arguments. The second argument is optional.
 useEffect`(<function>, <dependency>)`
 
+
 # Basic Structure of useEffect
   ```javascript
     import React, { useEffect } from 'react';
@@ -20,6 +21,18 @@ useEffect`(<function>, <dependency>)`
     }
 
   ```
+
+1. **`useEffect` Behavior:** In React, `useEffect` does run after every render if it has dependencies listed in its dependency array. If you include state variables in the dependency array, the effect will run whenever those state variables change. If the dependency array is empty (`[]`), the effect runs only once, after the initial render.
+
+2. **Effect and Re-renders:** It’s important to note that `useEffect` itself doesn’t cause re-renders. Re-renders are triggered by state changes or prop updates. If an effect inside `useEffect` causes state updates, that will trigger another render.
+
+3. **Alerts in `useEffect`:** If you have an `alert` inside `useEffect`, it will be triggered based on how you configure the dependency array. If `count` is a dependency, the alert will show up every time `count` changes, which may not always be desirable.
+
+Here’s a refined summary:
+- **State Changes:** When state changes (e.g., `count`), the component re-renders to reflect the updated state.
+- **`useEffect` Execution:** The `useEffect` hook runs after every render based on its dependencies. If `count` is included in the dependency array, `useEffect` will run after every change to `count`.
+- **Alerts in `useEffect`:** An `alert` inside `useEffect` will show up according to the dependencies. If the dependency array includes a state variable like `count`, the alert will appear each time that state changes.
+
 
 ### Basic Example of UseEffect
   ```javascript
