@@ -1,4 +1,21 @@
-### Explanation of `useCallback` in Simple Words
+##  `useCallback` in Simple Words
+
+The React `useCallback` Hook returns a memoized callback function.
+
+Think of memoization as caching a value so that it does not need to be recalculated.
+
+This allows us to isolate resource intensive functions so that they will not automatically run on every render.
+
+The `useCallback` Hook only runs when one of its dependencies update.
+
+This can improve performance.
+
+The `useCallback` and `useMemo` Hooks are similar. The main difference is that `useMemo` returns a memoized value and `useCallback` returns a memoized function.
+
+## Problem
+
+One reason to use useCallback is to prevent a component from re-rendering unless its props have changed.
+
 
 `useCallback` is a React Hook that helps you **remember a function**. When you create a function inside a component, it gets recreated every time the component re-renders. Sometimes, this can cause performance issues, especially if you are passing the function to child components. `useCallback` prevents this by **"remembering"** the same function so that it doesn't change unless its dependencies change.
 
@@ -19,47 +36,6 @@ const memoizedFunction = useCallback(() => {
 
 ### Basic Example of `useCallback`
 
-Here’s a simple example to demonstrate how `useCallback` works:
-
-```jsx
-import React, { useState, useCallback } from 'react';
-
-// A child component that only re-renders when its props change
-const ChildComponent = React.memo(({ onButtonClick }) => {
-  console.log('Child component re-rendered!');
-  return <button onClick={onButtonClick}>Click Me</button>;
-});
-
-const ParentComponent = () => {
-  const [count, setCount] = useState(0);
-
-  // useCallback is used to memoize the function so it doesn't get recreated on each render
-  const handleClick = useCallback(() => {
-    console.log('Button clicked!');
-  }, []); // No dependencies, so it stays the same
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      {/* Passing the memoized function to the child component */}
-      <ChildComponent onButtonClick={handleClick} />
-    </div>
-  );
-};
-
-export default ParentComponent;
-```
-
-### How This Example Works:
-
-1. **ParentComponent**: It has a state `count` that increments when you click the "Increment" button.
-   
-2. **ChildComponent**: It takes a `onButtonClick` function as a prop. It's wrapped in `React.memo`, which means it only re-renders when its props change.
-
-3. **Without `useCallback`**: Every time you click "Increment," a new `handleClick` function would be created, causing `ChildComponent` to re-render.
-
-4. **With `useCallback`**: `handleClick` is "remembered" and doesn't change between renders. As a result, `ChildComponent` does not re-render unnecessarily.
 
 ### Summary
 
