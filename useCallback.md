@@ -23,6 +23,22 @@ In simpler terms:
 - **Without `useCallback`**: A new function is created every time the component updates.
 - **With `useCallback`**: The same function is reused unless something it depends on changes.
 
+## Clear Definitin
+
+Steps to Follow,
+1. Make a chid component name it anything in my case i named it as Navbar.
+2. in navbar make anyfunction in my case i started with the simple case as console.log('this is the child component)
+3. next we pass the child component in the main app and when we start out app on browser we'll see that the when the state is changing on count, because out button component is a state the the child will be re-rendered which we dont want because if the child component had any complicated function it would create a big problem for the app. 
+4. In order to solve the problem we use memo for now, we can import memo from react and use it like this 'export default memo(Navbar)'. This way our child component will be memorized. But this is only when we dont have any props in the child component.
+
+5. If we have props in the child component.
+6. First we make a function which we named as prop and passed it in the child component like this '<Navbar prop={prop}/>'. and in the child component we have to call it as well like this 'const Navbar = (prop) =>' so now our problem will start to rise again. For that we use 'usecallback'.
+
+7. instead of this 'const prop = ()=>', we call callback like this 'const prop = useCallback(()=>' and then we also make an emty array so our child component renders only once.
+
+8. Next lets add another prop as state which we want to update and re-renders only if we want to, so we make it and name it as add and aslo pass it in the child component like this '<Navbar prop={prop} add={add} />' and int the other page of the child component navbar. and make a button which we the add changes the child component will re-render but if we click on count the child component will not re-render.
+
+
 ### Basic Syntax of `useCallback`
 
 ```jsx
@@ -50,71 +66,51 @@ const memoizedFunction = useCallback(() => {
 ### Example to Understand the Difference:
 
 Let's say you have a parent component that passes a function as a prop to a child component. If you don't use `useCallback`, a new function is created on every render, causing the child component to re-render even if nothing else has changed.
+### Child Component
+  ```jsx
+  import {React, memo} from 'react'
+  
+  const Navbar = (prop, add) => {
+      console.log('child component from navbar') // this is the child componet which we are using in the main app component, also we are using usestate and when the state changes this console will will re-render and make the app slow and wont be optimized thats the reasone we use use call back. For now if we use memo in this component it will solve out problem.
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+  
+  export default memo(Navbar) // we need to use the memo function which is going to memorize the function and wont let it re-render the child component.
+  //but for now our problem is solved. But if we use any props for our child it will start to re-render again because child will think this is part of state.
+  // we have passed the prop from main app and if we use console.log in the chrome browser we will see the problem will rise again an the re-render will start again.
+  // for that problem we use UseCallBack().
+  ```
 
-#### Without `useCallback`:
+### Main App Component
 
-```jsx
-import React, { useState } from 'react';
-
-const ChildComponent = React.memo(({ handleClick }) => {
-  console.log('ChildComponent re-rendered');
-  return <button onClick={handleClick}>Click Me</button>;
-});
-
-const ParentComponent = () => {
-  const [count, setCount] = useState(0);
-
-  // Function is recreated on every render
-  const handleClick = () => {
-    console.log('Button clicked!');
-  };
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <ChildComponent handleClick={handleClick} />
-    </div>
-  );
-};
-
-export default ParentComponent;
-```
-
-- In this example, the `ChildComponent` will re-render every time the `ParentComponent` renders because a new `handleClick` function is created on each render.
-
-#### With `useCallback`:
-
-```jsx
-import React, { useState, useCallback } from 'react';
-
-const ChildComponent = React.memo(({ handleClick }) => {
-  console.log('ChildComponent re-rendered');
-  return <button onClick={handleClick}>Click Me</button>;
-});
-
-const ParentComponent = () => {
-  const [count, setCount] = useState(0);
-
-  // Function is memoized and does not get recreated on each render
-  const handleClick = useCallback(() => {
-    console.log('Button clicked!');
-  }, []); // No dependencies, so it stays the same
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <ChildComponent handleClick={handleClick} />
-    </div>
-  );
-};
-
-export default ParentComponent;
-```
-
-- Now, `handleClick` is memoized, and it doesn’t change between renders. Therefore, `ChildComponent` will not re-render unless its props change.
-
+  ```jsx
+  import React, { useCallback, useState } from 'react'
+  import Navbar from './Com/Navbar'
+  const App = () => {
+    const [count, setcount] = useState(0)
+    const [add, setadd] = useState(0)
+    // const prop = ()=> { //with this prop function that we passed in the child component out child will start to re-render again. for that we use usecallback.
+    //   console.log('this is prop')
+    // }
+    const prop = useCallback(() => {
+      console.log('this is prop') //but in order for it to work we need to use an emty array so it will render only once, as we also saw in useEffect
+    }, [add])
+    return (
+      <div>
+        <Navbar prop={prop} add={add} />
+        <p>count {count}</p>
+        <button onClick={() => setcount(count + 1)}>count</button>
+        <button onClick={()=>setadd(add+1)}>add</button>
+      </div>
+    )
+  }
+  
+  export default App
+  ```
 ### Summary:
 - **`useRef`**: Not suitable for functions; it doesn’t help prevent a function from being recreated on each render.
 - **`useCallback`**: Specifically designed to memoize functions, ensuring the function reference remains the same between renders unless its dependencies change.
