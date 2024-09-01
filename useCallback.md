@@ -26,17 +26,17 @@ In simpler terms:
 ## Clear Definition
 
 Steps to Follow,
-1. Make a chid component name it anything in my case i named it as Navbar.
-2. in navbar make anyfunction in my case i started with the simple case as console.log('this is the child component)
-3. next we pass the child component in the main app and when we start out app on browser we'll see that the when the state is changing on count, because out button component is a state the the child will be re-rendered which we dont want because if the child component had any complicated function it would create a big problem for the app. 
-4. In order to solve the problem we use memo for now, we can import memo from react and use it like this 'export default memo(Navbar)'. This way our child component will be memorized. But this is only when we dont have any props in the child component.
+1. Make a chid component name it anything in my case i named it as `Navbar`.
+2. in navbar make any function in my case i started with the simple case as console.log('this is the child component)
+3. next we pass the child component in the main app and when we start out app on browser we'll see that the when the state is changing on count, because out button component is a `state` the the child will be re-rendered which we dont want because if the child component had any complicated function it would create a big problem for the app. 
+4. In order to solve the problem we use memo for now, we can import memo from react and use it like this `export default memo(Navbar)`. This way our child component will be memorized. But this is only when we dont have any props in the child component.
 
 5. If we have props in the child component.
-6. First we make a function which we named as prop and passed it in the child component like this '<Navbar prop={prop}/>'. and in the child component we have to call it as well like this 'const Navbar = (prop) =>' so now our problem will start to rise again. For that we use 'usecallback'.
+6. First we make a function which we named as prop and passed it in the child component like this `<Navbar prop={prop}/>`. and in the child component we have to call it as well like this `const Navbar = (prop) =>` so now our problem will start to rise again. For that we use `usecallback`.
 
-7. instead of this 'const prop = ()=>', we call callback like this 'const prop = useCallback(()=>' and then we also make an emty array so our child component renders only once.
+7. instead of this `const prop = ()=>`, we call callback like this `const prop = useCallback(()=>` and then we also make an emty array so our child component renders only once.
 
-8. Next lets add another prop as state which we want to update and re-renders only if we want to, so we make it and name it as add and aslo pass it in the child component like this '<Navbar prop={prop} add={add} />' and int the other page of the child component navbar. and make a button which we the add changes the child component will re-render but if we click on count the child component will not re-render.
+8. Next lets add another prop as state which we want to update and re-renders only if we want to, so we make it and name it as add and aslo pass it in the child component like this `<Navbar prop={prop} add={add} />` and int the other page of the child component navbar. and make a button which we the add changes the child component will re-render but if we click on count the child component will not re-render.
 
 
 ### Basic Syntax of `useCallback`
