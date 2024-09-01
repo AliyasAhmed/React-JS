@@ -23,7 +23,7 @@ In simpler terms:
 - **Without `useCallback`**: A new function is created every time the component updates.
 - **With `useCallback`**: The same function is reused unless something it depends on changes.
 
-## Clear Definitin
+## Clear Definition
 
 Steps to Follow,
 1. Make a chid component name it anything in my case i named it as Navbar.
