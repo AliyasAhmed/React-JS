@@ -55,21 +55,22 @@
     ```
 9. We can also add a delay to submit so people wont be able to click multiple time when submitting a form
     
-  ```jsx
-    const delay = (d) => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve()
-        }, d * 1000); // d * 1000 because if we only use 1000 it would stuck of 1 sec and we would be able to change it.
-      })
-    }
-  ```
-10. Next we can do is disable the submit button so we would be able to click it only once at a time. we have to make a function for that in `submit button`, but we have to make it in `formstate` because its not a `function` its a `value` , `formState: { errors, isSubmitting }` like this so in our input we will use `disabled = {isSubmitting}`.
+      ```jsx
+        const delay = (d) => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve()
+            }, d * 1000); // d * 1000 because if we only use 1000 it would stuck of 1 sec and we would be able to change it.
+          })
+        }
+      ```
+10. Next we can do is disable the submit button so we would be able to click it only once at a time.
+we have to make a function for that in `submit button`, but we have to make it in `formstate` because its not a `function` its a `value` , `formState: { errors, isSubmitting }` like this so in our input we will use `disabled = {isSubmitting}`.
     
-  ```jsx
-  <input disabled={isSubmitting} type="submit" value="submit"/>
-  ```
-11. {isSubmitting && <div>Loading...</div>} so basically we said if isSubmitting is true show Loading.. so when the isSubmitting value is true the button will be disabled and loading will show up
+      ```jsx
+      <input disabled={isSubmitting} type="submit" value="submit"/>
+      ```
+12. {isSubmitting && <div>Loading...</div>} so basically we said if isSubmitting is true show Loading.. so when the isSubmitting value is true the button will be disabled and loading will show up
     
   ```jsx
   {isSubmitting && <div>Loading...</div>} //so basically we said if isSubmitting is true show Loading.. 
