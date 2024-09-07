@@ -11,7 +11,7 @@
     ```jsx
     const { register, handleSubmit, watch, setError, formState: { errors, isSubmitting } } = useForm();
     // register, handleSubmit, watch, setError, formState: { errors, isSubmitting} these are the things we would
-    would use to make a basic form 
+    // would use to make a basic form 
     ```
 3. when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
     ```jsx
