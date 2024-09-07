@@ -70,11 +70,11 @@ we have to make a function for that in `submit button`, but we have to make it i
       ```jsx
       <input disabled={isSubmitting} type="submit" value="submit"/>
       ```
-12. {isSubmitting && <div>Loading...</div>} so basically we said if isSubmitting is true show Loading.. so when the isSubmitting value is true the button will be disabled and loading will show up
+11. `{isSubmitting && <div>Loading...</div>}` so basically we said if isSubmitting is true show Loading.. so when the isSubmitting value is true the button will be disabled and loading will show up
     
-  ```jsx
-  {isSubmitting && <div>Loading...</div>} //so basically we said if isSubmitting is true show Loading.. 
-  ```
+      ```jsx
+      {isSubmitting && <div>Loading...</div>} //so basically we said if isSubmitting is true show Loading.. 
+      ```
 12. now in password we would do same as we did in username to show errors .
     
   ```jsx
@@ -88,28 +88,28 @@ we have to make a function for that in `submit button`, but we have to make it i
   {errors.myform && <div className='text-red-500'>{errors.myform.message}</div>}
   ```
 14. first we make setError in the hook to get custome errors then we write this in the onSubmit button
-  ```jsx
-    const onSubmit = async (data) => {
-      await delay(2) // for network delay 
-      console.log(data)
-      if (data.username !== 'aliyas') {
-        setError('myform', { message: 'username is invalid' }) // myform is custom name here for the error we can set anything and message should be object.
-      }
-    };
-  ```
+      ```jsx
+        const onSubmit = async (data) => {
+          await delay(2) // for network delay 
+          console.log(data)
+          if (data.username !== 'aliyas') {
+            setError('myform', { message: 'username is invalid' }) // myform is custom name here for the error we can set anything and message should be object.
+          }
+        };
+      ```
 15. Then `{errors.myform && <div className='text-red-500'>{errors.myform.message}</div> }` below the input submit also we canwrite anything instead of my form but the message should be in object.
 
-17. we made another custome error by the name of ahmed which is a blocked user so we would follow same process.
+16. we made another custome error by the name of ahmed which is a blocked user so we would follow same process.
 #### In Total It looks like this
-```jsx
-    const onSubmit = async (data) => {
-    await delay(2) // for network delay 
-    console.log(data)
-    if (data.username !== 'aliyas') {
-      setError('myform', { message: 'username is invalid' }) // tHis is for the username validation
-    }
-    if (data.username === 'ahmed') {
-      setError('ahmed', { message: 'sorry this user is blocked' }) this is also for usernmae validation
-    }
-  };
-```
+    ```jsx
+        const onSubmit = async (data) => {
+        await delay(2) // for network delay 
+        console.log(data)
+        if (data.username !== 'aliyas') {
+          setError('myform', { message: 'username is invalid' }) // tHis is for the username validation
+        }
+        if (data.username === 'ahmed') {
+          setError('ahmed', { message: 'sorry this user is blocked' }) this is also for usernmae validation
+        }
+      };
+    ```
