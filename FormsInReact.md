@@ -119,3 +119,59 @@ we have to make a function for that in `submit button`, but we have to make it i
         }
       };
     ```
+
+
+# **Full Code**
+
+    ```jsx
+    import React from 'react'
+    import { set, useForm } from "react-hook-form"
+    
+    const App = () => {
+      const { register, handleSubmit, watch, setError, formState: { errors, isSubmitting } } = useForm();
+    
+      const delay = (d) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve()
+          }, d * 1000);
+        })
+      }
+      const onSubmit = async (data) => {
+        await delay(2) // for network delay 
+        console.log(data)
+        if (data.username !== 'aliyas') {
+          setError('myform', { message: 'username is invalid' })
+        }
+        if (data.username === 'ahmed') {
+          setError('ahmed', { message: 'sorry this user is blocked' })
+        }
+      };
+      return (
+        <>
+    
+          <div className="min-h-screen flex items-center justify-center">
+            <div className=" border border-gray-800 p-9 rounded-lg shadow-xl shadow-slate-700 ">
+              {isSubmitting && <div>Loading...</div>}
+              <form onSubmit={handleSubmit(onSubmit)} className='container flex flex-col items-center'>
+                <p className='pb-5'>Username</p>
+                <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' }, minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' } })} type="text" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
+                {errors.username && <div className='text-red-500'>{errors.username.message}</div>}
+                <br />
+                <p className='pb-5'>Password</p>
+                <input placeholder='password' {...register("password", { required: { value: true, message: 'This field is required' }, minLength: { value: 3, message: "atleast three characters " } })} type="password" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
+                {errors.password && <div className='text-red-500'>{errors.password.message}</div>}
+                <br />
+                <input disabled={isSubmitting} type="submit" value="submit" className="mb-4 bg-slate-900 rounded-lg cursor-pointer p-3 hover:bg-slate-800" />
+                {errors.myform && <div className='text-red-500'>{errors.myform.message}</div>}
+                {errors.ahmed && <div className='text-red-500'>{errors.ahmed.message}</div>}
+              </form>
+            </div>
+          </div>
+        </>
+      )
+    }
+    
+    export default App
+    ```
+
