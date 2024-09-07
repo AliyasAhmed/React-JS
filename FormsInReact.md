@@ -13,11 +13,17 @@
   // register, handleSubmit, watch, setError, formState: { errors, isSubmitting} these are the things we would
   would use to make a basic form 
   ```
-#### ** when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` **
+####  when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
   ```jsx
   input placeholder='username' {...register("username")
   ```
 ####  if we use `{required : true }` it means this filed is required and you cant submit without filling it up. As well as for the `minlength` and `max length` we can do same thing `{required : true, minlength: 3, maxlength: 8}` remember this is an `object` that the reasone we are using it like this `{argument:value}`.
   ```jsx
-  <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' }, minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' } })}   type="text" />
+  <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
+
+  minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' } })}   type="text" />
+  ```
+#### As we used the the `require`, `max` and `min` field we have catch the `errors` if the requirement is not filled, for that we will use `errors` that we already imported.
+  ```jsx
+  formState: { errors, isSubmitting } } = useForm();
   ```
