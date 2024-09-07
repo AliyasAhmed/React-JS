@@ -30,13 +30,13 @@
   ```
 6. We can use errors like this `{errors.username && <div>There is some error in username </div> }` bellow the filed 
    that contains requirement and other stuff and we use div to implement out message
-  ```jsx
-  <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
-  minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8'}
-  })} type="text" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
-  {errors.username && <div className='text-red-500'>{errors.username.message}</div>}
-  // every input will contains its own errors object like this so it show errors for each input seperately
-  ```
+    ```jsx
+    <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
+    minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8'}
+    })} type="text" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
+    {errors.username && <div className='text-red-500'>{errors.username.message}</div>}
+    // every input will contains its own errors object like this so it show errors for each input seperately
+    ```
 7. Also instead of this `{minLength : 3, maxLength : 8}` we can show the message for indidual objeccts like this
    ```jsx
    minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' }
