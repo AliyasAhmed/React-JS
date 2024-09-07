@@ -13,7 +13,7 @@
   // register, handleSubmit, watch, setError, formState: { errors, isSubmitting} these are the things we would
   would use to make a basic form 
   ```
-####  when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
+ 3. ####  when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
   ```jsx
   input placeholder='username' {...register("username")
   ```
@@ -26,4 +26,12 @@
 #### As we used the the `require`, `max` and `min` field we have catch the `errors` if the requirement is not filled, for that we will use `errors` that we already imported.
   ```jsx
   formState: { errors, isSubmitting } } = useForm();
+  ```
+#### We can use errors like this `{errors.username && <div>There is some error in username </div> }` bellow the filed that contains requirement and other stuff and we use div to implement out message
+  ```jsx
+  <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
+  minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8'}
+  })} type="text" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
+  {errors.username && <div className='text-red-500'>{errors.username.message}</div>}
+  // every input will contains its own errors object like this so it show errors for each input seperately
   ```
