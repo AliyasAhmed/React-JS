@@ -40,7 +40,7 @@
     {errors.username && <div className='text-red-500'>{errors.username.message}</div>}
     // every input will contains its own errors object like this so it show errors for each input seperately
     ```
-8. Also instead of this `{minLength : 3, maxLength : 8}` we can show the message for indidual objeccts like this
+7. Also instead of this `{minLength : 3, maxLength : 8}` we can show the message for indidual objeccts like this
    
    ```jsx
    minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' }
@@ -53,7 +53,7 @@
     ```jsx
     {required : {value:true, message: 'this field is required'}
     ```
-10. We can also add a delay to submit so people wont be able to click multiple time when submitting a form
+9. We can also add a delay to submit so people wont be able to click multiple time when submitting a form
     
   ```jsx
     const delay = (d) => {
@@ -97,7 +97,8 @@
     };
   ```
 15. Then `{errors.myform && <div className='text-red-500'>{errors.myform.message}</div> }` below the input submit also we canwrite anything instead of my form but the message should be in object.
-16. we made another custome error by the name of ahmed which is a blocked user so we would follow same process.
+
+17. we made another custome error by the name of ahmed which is a blocked user so we would follow same process.
 #### In Total It looks like this
 ```jsx
     const onSubmit = async (data) => {
