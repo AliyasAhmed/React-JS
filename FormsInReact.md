@@ -123,7 +123,8 @@ we have to make a function for that in `submit button`, but we have to make it i
 
 # **Full Code**
 
-    ```jsx
+
+```jsx
     import React from 'react'
     import { set, useForm } from "react-hook-form"
     
@@ -173,5 +174,5 @@ we have to make a function for that in `submit button`, but we have to make it i
     }
     
     export default App
-    ```
+```
 
