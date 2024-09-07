@@ -79,29 +79,29 @@ we have to make a function for that in `submit button`, but we have to make it i
       
 12. now in password we would do same as we did in username to show errors .
     
-  ```jsx
-  {...register("password", {required: {value:true, message: 'This field is required'}, minLength: {value:3, message:"atleast 
-  three characters "}
-  ```
+    ```jsx
+    {...register("password", {required: {value:true, message: 'This field is required'}, minLength: {value:3, message:"atleast 
+    three characters "}
+    ```
 
 13. In Order to get custome errors we have added new line of code `{errors.myfrom && <div className='text-red-500'>{errors.myfrom.message}</div> }` right below the input submit we have to make a function if setError in the useFrom hook.
     
-  ```jsx
-  <input disabled={isSubmitting} type="submit" value="submit" />
-  {errors.myform && <div className='text-red-500'>{errors.myform.message}</div>}
-  ```
+    ```jsx
+    <input disabled={isSubmitting} type="submit" value="submit" />
+    {errors.myform && <div className='text-red-500'>{errors.myform.message}</div>}
+    ```
 
 14. first we make setError in the hook to get custome errors then we write this in the onSubmit button
     
-      ```jsx
-        const onSubmit = async (data) => {
-          await delay(2) // for network delay 
-          console.log(data)
-          if (data.username !== 'aliyas') {
-            setError('myform', { message: 'username is invalid' }) // myform is custom name here for the error we can set anything and message should be object.
-          }
-        };
-      ```
+    ```jsx
+    const onSubmit = async (data) => {
+      await delay(2) // for network delay 
+      console.log(data)
+      if (data.username !== 'aliyas') {
+        setError('myform', { message: 'username is invalid' }) // myform is custom name here for the error we can set anything and message should be object.
+      }
+    };
+    ```
 15. Then `{errors.myform && <div className='text-red-500'>{errors.myform.message}</div> }` below the input submit also we canwrite anything instead of my form but the message should be in object.
 
 
