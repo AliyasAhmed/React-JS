@@ -45,8 +45,8 @@
    ```jsx
    minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' }
    ```
-  `{minLength : 3, maxLength : 8}` => `{minLength : {value:3, message:'min length is 3'}`, `maxLength : {value : 8, message: 'max value should be more than 3'}`, 
-  like this we make object of object and display messages but now we have to show the message we have to change previous div from `<div>There is some error in username </div> }` to `<div>{errors.username}<div/>` so it would show all the error messages
+      `{minLength : 3, maxLength : 8}` => `{minLength : {value:3, message:'min length is 3'}`, `maxLength : {value : 8, message: 'max value should be more than 3'}`, 
+      like this we make object of object and display messages but now we have to show the message we have to change previous div from `<div>There is some error in username </div> }` to `<div>{errors.username}<div/>` so it would show all the error messages
 
 8. same thing can be done with require object which contains true => {required : true} instead we can do this so the message of error would show up. `{required : {value:true, message: 'this field is required'}`.
    
