@@ -115,7 +115,7 @@ we have to make a function for that in `submit button`, but we have to make it i
           setError('myform', { message: 'username is invalid' }) // tHis is for the username validation
         }
         if (data.username === 'ahmed') {
-          setError('ahmed', { message: 'sorry this user is blocked' }) this is also for usernmae validation
+          setError('ahmed', { message: 'sorry this user is blocked' }) // this is also for usernmae validation
         }
       };
     ```
