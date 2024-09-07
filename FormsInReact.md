@@ -176,3 +176,134 @@ we have to make a function for that in `submit button`, but we have to make it i
     export default App
 ```
 
+
+# **What If We Don't Use React Form**
+
+Certainly! The `...register` syntax in your code is used to spread the properties and methods returned by the `register` function from the [`react-hook-form`](https://react-hook-form.com/) library into the `input` element. This effectively "registers" the input field with the `react-hook-form` system, enabling form state management and validation.
+
+Here's the relevant part of your code for reference:
+
+```javascript
+const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+<form onSubmit={handleSubmit(onSubmit)} className='container flex flex-col items-center'>
+  <input name="username" {...register("username")} className="mb-4 bg-gray-400 text-black" />
+  <input name="password" {...register("password")} type="password" className="mb-4 bg-gray-400 text-black" />
+  <input type="submit" value="submit" className="mb-4 bg-gray-400 cursor-pointer p-3" />
+</form>
+```
+
+If you were not using `react-hook-form` and the `register` function, you would need to manually handle the state and validation for each input field. This would involve writing more code to manage the state, handle changes, and validate the inputs.
+
+For example, without `react-hook-form`, you might have to do something like this:
+
+```javascript
+import React, { useState } from 'react';
+
+const App = () => {
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform validation and submit the form
+    if (formData.username === '') {
+      setErrors({ ...errors, username: 'Username is required' });
+    } else {
+      console.log(formData);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className='container flex flex-col items-center'>
+      <input
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+        className="mb-4 bg-gray-400 text-black"
+      />
+      {errors.username && <span>{errors.username}</span>}
+      <input
+        name="password"
+        type="password"
+        value={formData.password}
+        onChange={handleChange}
+        className="mb-4 bg-gray-400 text-black"
+      />
+      <input type="submit" value="submit" className="mb-4 bg-gray-400 cursor-pointer p-3" />
+    </form>
+  );
+};
+
+export default App;
+```
+
+As you can see, without `react-hook-form`, you need to manually handle the state and validation, which can be cumbersome and error-prone. The `register` function simplifies this process by automatically managing the state and validation for you.
+        
+        
+        
+Yes, you are correct. The `register` function from the `[react-hook-form](https://react-hook-form.com/)` library is an alternative to manually handling the `onChange` event and `e.target.value` for each input field.
+
+When you use `register`, it automatically handles the state and validation for the input fields, which simplifies the code and reduces the amount of boilerplate you need to write.
+
+Here's a comparison for clarity:
+
+### Using `react-hook-form` with `register`:
+```javascript
+import React from 'react';
+import { useForm } from 'react-hook-form';
+
+const App = () => {
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className='container flex flex-col items-center'>
+      <input name="username" {...register("username")} className="mb-4 bg-gray-400 text-black" />
+      <input name="password" {...register("password")} type="password" className="mb-4 bg-gray-400 text-black" />
+      <input type="submit" value="submit" className="mb-4 bg-gray-400 cursor-pointer p-3" />
+    </form>
+  );
+};
+
+export default App;
+```
+
+### Manually handling state and `onChange`:
+```javascript
+import React, { useState } from 'react';
+
+const App = () => {
+  const [formData, setFormData] = useState({ username: '', password: '' });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className='container flex flex-col items-center'>
+      <input name="username" value={formData.username} onChange={handleChange} className="mb-4 bg-gray-400 text-black" />
+      <input name="password" value={formData.password} onChange={handleChange} type="password" className="mb-4 bg-gray-400 text-black" />
+      <input type="submit" value="submit" className="mb-4 bg-gray-400 cursor-pointer p-3" />
+    </form>
+  );
+};
+
+export default App;
+```
+
+In the first example, `react-hook-form`'s `register` function takes care of the state and validation, making the code cleaner and more concise. In the second example, you have to manually handle the state and `onChange` events for each input field.
+        
+
