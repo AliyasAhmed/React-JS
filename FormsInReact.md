@@ -95,3 +95,18 @@
       }
     };
   ```
+15. Then `{errors.myform && <div className='text-red-500'>{errors.myform.message}</div> }` below the input submit also we canwrite anything instead of my form but the message should be in object.
+16. we made another custome error by the name of ahmed which is a blocked user so we would follow same process.
+#### In Total It looks like this
+```jsx
+    const onSubmit = async (data) => {
+    await delay(2) // for network delay 
+    console.log(data)
+    if (data.username !== 'aliyas') {
+      setError('myform', { message: 'username is invalid' }) // tHis is for the username validation
+    }
+    if (data.username === 'ahmed') {
+      setError('ahmed', { message: 'sorry this user is blocked' }) this is also for usernmae validation
+    }
+  };
+```
