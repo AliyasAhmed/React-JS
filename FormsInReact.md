@@ -84,7 +84,9 @@ const onSubmit = async (data) => { ... };
         }
       ```
 12. Next we can do is disable the submit button so we would be able to click it only once at a time.
-we have to make a function for that in `submit button`, but we have to make it in `formstate` because its not a `function` its a `value` , `formState: { errors, isSubmitting }` like this so in our input we will use `disabled = {isSubmitting}`.
+
+### we have to make a function for that in `submit button`, but we have to make it in `formstate` because its not a `function` its a `value` , `formState: { errors, isSubmitting }` like this so in our input we will use `disabled = {isSubmitting}`. 
+when we make `disabled = {isSubmitting}` it wont let us click the submit button unless we get the data, basically if we dont use it and we click the data even with the delay `five times` we will recieve our data five times so the solution to the problem is this `disabled = {isSubmitting}`. even if we click multiple times we will only get data once.
     
       ```jsx
       <input disabled={isSubmitting} type="submit" value="submit"/>
