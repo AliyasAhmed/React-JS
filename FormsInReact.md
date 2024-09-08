@@ -192,7 +192,46 @@ we have to make a function for that in `submit button`, but we have to make it i
     
     export default App
 ```
+### Questions
 
+The key reason we don't use `onSubmit` on the `<input type="submit" />` element is because of how HTML forms and React work together. Let's break it down.
+
+### Why Not Use `onSubmit` on `<input type="submit" />`?
+
+1. **HTML Form Behavior**: In HTML, the `<form>` element is what handles form submissions, not the `<input type="submit" />`. When you click the submit button, the form itself triggers the `submit` event, not the button.
+
+2. **`onSubmit` Event**: The `onSubmit` event must be placed on the `<form>` tag. This is because when you submit a form (either by clicking a submit button or pressing the Enter key), the browser looks for an `onSubmit` event handler on the form element. If it's placed on the button, it won't be triggered as you might expect.
+
+3. **React `handleSubmit` Function**: The `handleSubmit` function provided by `react-hook-form` is specifically designed to be used with the form's `onSubmit` event. It wraps around your custom `submit` function to handle validation and prevent the default browser behavior (like refreshing the page).
+
+### Why Do We Use `handleSubmit` on the `<form>` Tag?
+
+- **Validation**: The `handleSubmit` function ensures that all validations you've set up using `register` are checked before calling your custom submit function (`onSubmit` in this case). If you put `onSubmit` on the `<input type="submit" />`, the validations won't be processed correctly.
+
+- **Prevent Default Form Submission Behavior**: In a standard HTML form, when the form is submitted, the browser reloads the page by default. `handleSubmit` prevents this default behavior, allowing React to handle everything smoothly.
+
+- **Handling Enter Key Presses**: When the user presses Enter in an input field, the form is submitted automatically. If `handleSubmit` is on the form, it will handle this correctly. If you put it on the submit button, pressing Enter won't trigger the form submission properly.
+
+### Correct Approach
+
+Here's why we correctly place `handleSubmit` on the `<form>`:
+
+```jsx
+<form onSubmit={handleSubmit(onSubmit)} className='container flex flex-col items-center'>
+  {/* Form elements like input fields go here */}
+  <input type="submit" value="submit" className='text-white bg-slate-700' />
+</form>
+```
+
+- **`onSubmit={handleSubmit(onSubmit)}`**: This line on the `<form>` ensures that when the form is submitted (either by clicking the submit button or pressing Enter), it first checks for validation and then calls the `onSubmit` function.
+
+### Summary
+
+- **HTML Form Behavior**: Form submission is managed by the `<form>` element, not the `<input>` button.
+- **`handleSubmit` on `<form>`**: This is required to perform validation, prevent default browser behavior, and handle all submission scenarios properly.
+- **Incorrect Behavior on Button**: Placing `onSubmit` on the button won't trigger correctly when pressing Enter or handle form-level validation as needed.
+
+By using `handleSubmit` on the form, you ensure everything works as expected in a React environment with `react-hook-form`.
 
 # **What If We Don't Use React Form**
 
