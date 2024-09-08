@@ -3,17 +3,17 @@
 
 ### Step by Step Guide
 
-1. we import this
+### 1. we import this
     ```jsx
     import { set, useForm } from "react-hook-form"
     ```
-2. we make a hook of `useform()`
+### 2. we make a hook of `useform()`
     ```jsx
     const { register, handleSubmit, watch, setError, formState: { errors, isSubmitting } } = useForm();
     // register, handleSubmit, watch, setError, formState: { errors, isSubmitting} these are the things we would
     // would use to make a basic form 
     ```
-3. when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
+### 3. when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
     ```jsx
     input placeholder='username' {...register("username")
     ```
