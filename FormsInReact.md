@@ -3,20 +3,20 @@
 
 ### Step by Step Guide
 
-### 1. we import this
-    ```jsx
-    import { set, useForm } from "react-hook-form"
-    ```
+### 1. we import this `useForm`
+```jsx
+import { set, useForm } from "react-hook-form"
+```
 ### 2. we make a hook of `useform()`
-    ```jsx
-    const { register, handleSubmit, watch, setError, formState: { errors, isSubmitting } } = useForm();
-    // register, handleSubmit, watch, setError, formState: { errors, isSubmitting} these are the things we would
-    // would use to make a basic form 
-    ```
+```jsx
+const { register, handleSubmit, watch, setError, formState: { errors, isSubmitting } } = useForm();
+// register, handleSubmit, watch, setError, formState: { errors, isSubmitting} these are the things we would
+// would use to make a basic form 
+```
 ### 3. when we do this `{...register("username")}` then we dont require this anymore  `name='username' id=''` 
-    ```jsx
-    input placeholder='username' {...register("username")
-    ```
+```jsx
+input placeholder='username' {...register("username")
+```
 ### 4. `onSubmit` Function Definition
 
 ```javascript
@@ -34,112 +34,112 @@ const onSubmit = async (data) => { ... };
   - If the username is `'ahmed'`, it sets an error indicating the user is blocked.
 
 
-5. if we use `{required : true }` it means this filed is required and you cant submit without filling it up. As well            as for the `minlength` and `max length` we can do same thing `{required : true, minlength: 3, maxlength: 8}`       
+### 5. If we use `{required : true }` it means this filed is required and you cant submit without filling it up. As well            as for the `minlength` and `max length` we can do same thing `{required : true, minlength: 3, maxlength: 8}`       
    remember this is an `object` that the reasone we are using it like this `{argument:value}`.
    ### Important!
    Unless and until we dont mention value:true our message wont be showing to the user `{required:{value:true, message:'This Field is Required'}` if we only write `{required : true, message:" This is required}` The          message wont be showing we have to write like this `{required:{value:true, message:'This Field is Required'}` 
      
-    ```jsx
-    <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
-  
-    minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' } })}   type="text" />
-    ```
-7. As we used the the `require`, `max` and `min` field we have catch the `errors` if the requirement is not filled, for that we will use `errors` that we already imported.
+```jsx
+<input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
+
+minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' } })}   type="text" />
+```
+### 7. As we used the the `require`, `max` and `min` field we have catch the `errors` if the requirement is not filled, for that we will use `errors` that we already imported.
    
-    ```jsx
-    formState: { errors, isSubmitting } } = useForm();
-    ```
-8. We can use errors like this `{errors.username && <div>There is some error in username </div> }` bellow the filed 
+```jsx
+formState: { errors, isSubmitting } } = useForm();
+```
+### 8. We can use errors like this `{errors.username && <div>There is some error in username </div> }` bellow the filed 
    that contains requirement and other stuff and we use div to implement out message
 
-    ```jsx
-    <input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
-    minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8'}
-    })} type="text" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
-    {errors.username && <div className='text-red-500'>{errors.username.message}</div>}
-    // every input will contains its own errors object like this so it show errors for each input seperately
-    ```
-9. Also instead of this `{minLength : 3, maxLength : 8}` we can show the message for indidual objeccts like this
+```jsx
+<input placeholder='username' {...register("username", { required: { value: true, message: 'this field is required' },
+minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8'}
+})} type="text" className="mb-4 bg-[#5050504f] text-white p-2 mx-4 rounded-lg" />
+{errors.username && <div className='text-red-500'>{errors.username.message}</div>}
+// every input will contains its own errors object like this so it show errors for each input seperately
+```
+### 9. Also instead of this `{minLength : 3, maxLength : 8}` we can show the message for indidual objeccts like this
    
-   ```jsx
-   minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' }
-   ```
-      `{minLength : 3, maxLength : 8}` => `{minLength : {value:3, message:'min length is 3'}`, `maxLength : {value : 8, message: 'max value should be more than 3'}`, 
-      like this we make object of object and display messages but now we have to show the message we have to change previous div from `<div>There is some error in username </div> }` to `<div>{errors.username}<div/>` so it would show all the error messages
+```jsx
+minLength: { value: 3, message: 'min length is 3' }, maxLength: { value: 8, message: 'max value should be more than 8' }
+```
+`{minLength : 3, maxLength : 8}` => `{minLength : {value:3, message:'min length is 3'}`, `maxLength : {value : 8, message: 'max value should be more than 3'}`, 
+like this we make object of object and display messages but now we have to show the message we have to change previous div from `<div>There is some error in username </div> }` to `<div>{errors.username}<div/>` so it would show all the error messages
 
-10. same thing can be done with require object which contains true => {required : true} instead we can do this so the message of error would show up. `{required : {value:true, message: 'this field is required'}`.
+### 10. same thing can be done with require object which contains true => {required : true} instead we can do this so the message of error would show up. `{required : {value:true, message: 'this field is required'}`.
    
-    ```jsx
-    {required : {value:true, message: 'this field is required'}
-    ```
-11. We can also add a delay to submit so people wont be able to click multiple time when submitting a form
+```jsx
+{required : {value:true, message: 'this field is required'}
+```
+### 11. We can also add a delay to submit so people wont be able to click multiple time when submitting a form
     
-      ```jsx
-        const delay = (d) => {
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              resolve()
-            }, d * 1000); // d * 1000 because if we only use 1000 it would stuck of 1 sec and we would be able to change it.
-          })
-        }
-      ```
-12. Next we can do is disable the submit button so we would be able to click it only once at a time.
+```jsx
+const delay = (d) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve()
+    }, d * 1000); // d * 1000 because if we only use 1000 it would stuck of 1 sec and we would be able to change it.
+  })
+}
+```
+### 12. Next we can do is disable the submit button so we would be able to click it only once at a time.
 
 ### we have to make a function for that in `submit button`, but we have to make it in `formstate` because its not a `function` its a `value` , `formState: { errors, isSubmitting }` like this so in our input we will use `disabled = {isSubmitting}`. 
 when we make `disabled = {isSubmitting}` it wont let us click the submit button unless we get the data, basically if we dont use it and we click the data even with the delay `five times` we will recieve our data five times so the solution to the problem is this `disabled = {isSubmitting}`. even if we click multiple times we will only get data once.
-    
-      ```jsx
-      <input disabled={isSubmitting} type="submit" value="submit"/>
-      ```
-      
-13. `{isSubmitting && <div>Loading...</div>}` so basically we said if isSubmitting is true show Loading.. so when the isSubmitting value is true the button will be disabled and loading will show up
-    
-      ```jsx
-      {isSubmitting && <div>Loading...</div>} //so basically we said if isSubmitting is true show Loading.. 
-      ```
-      
-14. now in password we would do same as we did in username to show errors .
-    
-    ```jsx
-    {...register("password", {required: {value:true, message: 'This field is required'}, minLength: {value:3, message:"atleast 
-    three characters "}
-    ```
 
-15. In Order to get custome errors we have added new line of code `{errors.myfrom && <div className='text-red-500'>{errors.myfrom.message}</div> }` right below the input submit we have to make a function if setError in the useFrom hook.
-    
-    ```jsx
-    <input disabled={isSubmitting} type="submit" value="submit" />
-    {errors.myform && <div className='text-red-500'>{errors.myform.message}</div>}
-    ```
+```jsx
+<input disabled={isSubmitting} type="submit" value="submit"/>
+```
 
-16. first we make setError in the hook to get custome errors then we write this in the onSubmit button
+### 13. `{isSubmitting && <div>Loading...</div>}` so basically we said if isSubmitting is true show Loading.. so when the isSubmitting value is true the button will be disabled and loading will show up
+
+```jsx
+{isSubmitting && <div>Loading...</div>} //so basically we said if isSubmitting is true show Loading.. 
+```
+      
+### 14. now in password we would do same as we did in username to show errors .
     
-    ```jsx
+```jsx
+{...register("password", {required: {value:true, message: 'This field is required'}, minLength: {value:3, message:"atleast 
+three characters "}
+```
+
+### 15. In Order to get custome errors we have added new line of code `{errors.myfrom && <div className='text-red-500'>{errors.myfrom.message}</div> }` right below the input submit we have to make a function if setError in the useFrom hook.
+    
+```jsx
+<input disabled={isSubmitting} type="submit" value="submit" />
+{errors.myform && <div className='text-red-500'>{errors.myform.message}</div>}
+```
+
+### 16. first we make setError in the hook to get custome errors then we write this in the onSubmit button
+    
+```jsx
+const onSubmit = async (data) => {
+  await delay(2) // for network delay 
+  console.log(data)
+  if (data.username !== 'aliyas') {
+    setError('myform', { message: 'username is invalid' }) // myform is custom name here for the error we can set anything and message should be object.
+  }
+};
+```
+### 17. Then `{errors.myform && <div className='text-red-500'>{errors.myform.message}</div> }` below the input submit also we canwrite anything instead of my form but the message should be in object.
+
+
+### 18. we made another custome error by the name of ahmed which is a blocked user so we would follow same process. In Total It looks like this
+
+```jsx
     const onSubmit = async (data) => {
-      await delay(2) // for network delay 
-      console.log(data)
-      if (data.username !== 'aliyas') {
-        setError('myform', { message: 'username is invalid' }) // myform is custom name here for the error we can set anything and message should be object.
-      }
-    };
-    ```
-17. Then `{errors.myform && <div className='text-red-500'>{errors.myform.message}</div> }` below the input submit also we canwrite anything instead of my form but the message should be in object.
-
-
-18. we made another custome error by the name of ahmed which is a blocked user so we would follow same process. In Total It looks like this
-
-    ```jsx
-        const onSubmit = async (data) => {
-        await delay(2) // for network delay 
-        console.log(data)
-        if (data.username !== 'aliyas') {
-          setError('myform', { message: 'username is invalid' }) // tHis is for the username validation
-        }
-        if (data.username === 'ahmed') {
-          setError('ahmed', { message: 'sorry this user is blocked' }) // this is also for usernmae validation
-        }
-      };
-    ```
+    await delay(2) // for network delay 
+    console.log(data)
+    if (data.username !== 'aliyas') {
+      setError('myform', { message: 'username is invalid' }) // tHis is for the username validation
+    }
+    if (data.username === 'ahmed') {
+      setError('ahmed', { message: 'sorry this user is blocked' }) // this is also for usernmae validation
+    }
+  };
+```
 
 
 # **Full Code**
