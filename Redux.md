@@ -61,6 +61,7 @@ Redux requires that we write all state updates immutably, by making copies of da
 ```jsx
 src / counter / counterSlice.js;
 
+import { createSlice } from '@reduxjs/toolkit'
 export const counterSlice = createSlice({
   name: 'counter',         // A name for the slice (used for action types).
   initialState: {          // The initial state of the counter.
@@ -78,7 +79,9 @@ export const counterSlice = createSlice({
     }
   }
 });
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
+export default counterSlice.reducer
 ```
 
 # Add Slice Reducers to the Store
