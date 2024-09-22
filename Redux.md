@@ -61,36 +61,24 @@ Redux requires that we write all state updates immutably, by making copies of da
 ```jsx
 src / counter / counterSlice.js;
 
-import { createSlice } from "@reduxjs/toolkit";
-
 export const counterSlice = createSlice({
-  name: "counter",
-  initialState: {
-    value: 0,
+  name: 'counter',         // A name for the slice (used for action types).
+  initialState: {          // The initial state of the counter.
+    value: 0               // The counter starts at 0.
   },
-  reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-      // We know in react we have to use usestate in order to increament something but in redux state.value += 1 is what we use instead
+  reducers: {              // Functions (reducers) to change the state.
+    increment: (state) => {  // When "increment" is called:
+      state.value += 1;      // Add 1 to the current value.
     },
-    decrement: (state) => {
-      state.value -= 1;
-      // as usual it will decrement means will reduce the numbers
+    decrement: (state) => {  // When "decrement" is called:
+      state.value -= 1;      // Subtract 1 from the current value.
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
-  },
+    incrementByAmount: (state, action) => {  // When "incrementByAmount" is called:
+      state.value += action.payload;         // Add a specified amount (from `action.payload`).
+    }
+  }
 });
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-
-export default counterSlice.reducer;
 ```
 
 # Add Slice Reducers to the Store
