@@ -144,3 +144,188 @@ const Navbar = () => {
 
 export default Navbar
 ```
+
+# Explination
+
+let's break down the line `const count = useSelector((state) => state.counter.value)` and focus on `state.counter.value`.
+
+### `useSelector` Hook
+- `useSelector` is a hook provided by the [`react-redux`](https://redux.js.org/introduction/getting-started) library.
+- It allows you to extract data from the Redux store state.
+- The function you pass to `useSelector` is called a selector function.
+
+### Selector Function
+- The selector function receives the entire Redux state as its argument.
+- In this case, the selector function is `(state) => state.counter.value`.
+
+### `state`
+- `state` represents the entire Redux store state.
+- It is an object that contains all the slices of state defined in your store.
+
+### `state.counter`
+- `state.counter` refers to the part of the state managed by the `counter` slice.
+- This is because, in your store configuration, you have a reducer named `counter`:
+  ```jsx
+  export default configureStore({
+    reducer: {
+      counter: counterReducer,
+    },
+  });
+  ```
+
+### `state.counter.value`
+- `state.counter.value` accesses the `value` property of the `counter` slice of the state.
+- In your `counterSlice`, the initial state is defined as:
+  ```jsx
+  initialState: {
+    value: 0,
+  },
+  ```
+- So, `state.counter.value` will give you the current value of the counter.
+
+### Putting It All Together
+- `const count = useSelector((state) => state.counter.value)` means:
+  - Use the `useSelector` hook to get the current state from the Redux store.
+  - From the state, access the `counter` slice.
+  - From the `counter` slice, get the `value` property.
+  - Assign this value to the `count` variable.
+
+Let's clarify the concepts to avoid any confusion.
+
+### Redux State
+In [Redux](https://redux.js.org/introduction/getting-started), the **state** is a single JavaScript object that holds the entire state of your application. This state is managed by the Redux store.
+
+### Reducers
+Reducers are functions that specify how the state changes in response to actions. Each reducer manages a slice of the state. For example, you might have a `counterReducer` that manages the `counter` slice of the state.
+
+### Store Configuration
+When you configure your Redux store, you combine all your reducers into a single root reducer. This root reducer defines the structure of your state object.
+
+Here's an example of how you might configure your store:
+
+```jsx
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './counterSlice';
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
+
+export default store;
+```
+
+In this configuration:
+- `counterReducer` is responsible for managing the `counter` slice of the state.
+- The `counter` slice is a part of the overall state object.
+
+### Accessing State with `useSelector`
+The `useSelector` hook allows you to access the state inside your React components. The function you pass to `useSelector` is called a selector function, which extracts a specific part of the state.
+
+### Example Breakdown
+Let's break down the example again:
+
+```jsx
+const count = useSelector((state) => state.counter.value);
+```
+
+1. **`useSelector` Hook**: This hook is used to access the Redux state.
+2. **Selector Function**: `(state) => state.counter.value`
+   - **`state`**: This represents the entire Redux state object.
+   - **`state.counter`**: This accesses the `counter` slice of the state, which is managed by `counterReducer`.
+   - **`state.counter.value`**: This accesses the `value` property within the `counter` slice.
+
+### Putting It All Together
+- The Redux state is an object that contains all slices of state.
+- Each slice is managed by a corresponding reducer.
+- In your store configuration, you named one slice `counter`, managed by `counterReducer`.
+- `state.counter` accesses the `counter` slice of the state.
+- `state.counter.value` accesses the `value` property within the `counter` slice.
+
+So, `const count = useSelector((state) => state.counter.value)` means:
+- Use the `useSelector` hook to get the current state from the Redux store.
+- From the state, access the `counter` slice.
+- From the `counter` slice, get the `value` property.
+- Assign this value to the `count` variable.
+
+Yes, exactly! The **`payload`** will be the number (or any other data) that you **pass** when you dispatch the action.
+
+For example:
+
+```js
+dispatch(incrementByAmount(10));
+```
+
+Here:
+- The `payload` is `10`, because that's the number you're passing when calling `incrementByAmount(10)`.
+
+In the reducer:
+```js
+incrementByAmount: (state, action) => {
+  state.value += action.payload;
+}
+```
+
+- `action.payload` will hold the value `10`, which gets added to `state.value`.
+
+So, **`payload`** is just the data you're sending with the action, and it can be any type of value (like numbers, strings, or even objects), depending on what your action needs.
+
+Exactly! 🎯
+
+With **Redux**, you don't need to manually pass the state as **props** between components like you would in traditional React. Instead, you can simply use the **`useSelector`** hook to access the **global state** directly in any component that needs it.
+
+Here's the difference:
+
+### Without Redux (Using Props):
+You need to pass the `count` as a prop from the parent to child components:
+```jsx
+const Navbar = ({ count }) => {
+  return <div>This is Navbar, counter value: {count}</div>;
+};
+
+// In the parent component
+<Navbar count={count} />
+```
+This approach requires **prop drilling**—passing `count` through the parent, which can get messy as the app grows.
+
+---
+
+### With Redux (Using `useSelector`):
+You no longer need to pass the `count` as a prop. Instead, **any component** can just access the `count` value directly from the Redux store using `useSelector`:
+
+```jsx
+const Navbar = () => {
+  const count = useSelector((state) => state.counter.value); // Directly access Redux state
+  return <div>This is Navbar, counter value: {count}</div>;
+};
+```
+
+### **Key Benefits:**
+1. **No Prop Drilling**: You don't have to pass `count` from a parent component. Each component can independently access the state from the Redux store.
+2. **Centralized State**: All components use the same global state, so the `count` is consistent across the app.
+3. **Easier to Manage**: As your app grows, Redux makes it easier to manage state shared across multiple components without passing props.
+
+So, in Redux, instead of passing data through props, each component can directly "select" the part of the global state it needs using `useSelector`, making the code much simpler and scalable.
+
+Yes, you’re absolutely right! 🎯
+
+### How It Works:
+- **`useSelector`** allows your component to access specific pieces of the **global Redux state**.
+- In your example, you used `state.counter.value` to access the `value` property within the `counter` slice of the state.
+
+### Breakdown:
+- **`state`**: Represents the entire Redux store, which contains all the state for your application.
+- **`state.counter`**: Refers to the `counter` slice of that state. This slice contains everything related to the counter feature, including the `value`.
+- **`state.counter.value`**: This specifically gets the `value` property from the `counter` slice, which holds the current count you want to display.
+
+### Example Context:
+So when you write:
+```js
+const count = useSelector((state) => state.counter.value);
+```
+- You are telling your component: “I want to access the current value of the counter from the global state.” 
+
+### Summary:
+- **Yes**, you’re accessing a specific piece of state that you need for your component.
+- By using `useSelector`, you can pull in only the data necessary for that component, making it efficient and clean.
