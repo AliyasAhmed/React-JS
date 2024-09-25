@@ -95,7 +95,7 @@ import counterReducer from "../features/counter/counterSlice"; //import This
 
 export default configureStore({
   reducer: {
-    counter: counterReducer, // And this
+    counter: counterReducer, // And this (counterReducer is actually counter.reducer)
   },
 });
 ```
