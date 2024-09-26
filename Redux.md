@@ -90,6 +90,7 @@ Next, we need to import the reducer function from the counter slice and add it t
 
 ```jsx
 src / redux / store.js;
+
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../counter/counter"; //import This
 
